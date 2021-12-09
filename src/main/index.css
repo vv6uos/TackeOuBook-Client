@@ -1,24 +1,20 @@
-#bestsellerBook_section {
+#bestsellerBook_board {
   height: 320px;
   border: 4px solid black;
+  margin: 10px;
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
 }
-#bestsellerBook_section > p {
-  font-size: large;
-  margin: 4px;
-}
-#bestsellers_card_list {
+
+#bestseller_card_list {
   width: 900px;
   height: 300px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  justify-items: space-between;
   align-items: center;
   padding: 10px;
 }
-.bestsellers_card {
+.bestseller_card {
   width: 200px;
   height: 250px;
   border: black solid 2px;
@@ -27,6 +23,8 @@
 #sale_book_board {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
+  margin-top: 25px;
 }
 #sale_book_board > p {
   margin-top: 45px;
@@ -41,8 +39,8 @@
   padding: 10px;
 }
 .saleBook_card {
-  width: 200px;
-  height: 250px;
+  width: 220px;
+  height: 300px;
   border: black solid 2px;
   margin-right: 15px;
   margin-top: 20px;

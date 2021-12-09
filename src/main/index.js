@@ -1,34 +1,40 @@
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
 function MainPage() {
-  axios
-    .get("http://localhost:8080/bestsellers")
-    .then((result) => {
-      const bestsellers = result.data;
-      console.log("데이터 전송 성공 : ", bestsellers);
-    })
-    .catch((err) => {
-      console.log("실패 :", err);
-    });
+  const [bestsellers, setBestsellers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/bestsellers")
+      .then((result) => {
+        const bestsellers = result.data.bestsellers;
+        console.log("데이터 전송 성공 : ", bestsellers);
+        setBestsellers(bestsellers);
+      })
+      .catch((err) => {
+        console.log("실패 :", err);
+      });
+  }, []);
+
   return (
     <div>
-      <div id="bestsellerBook_section">
-        <p>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </p>
-        <div id="bestsellers_card_list">
-          <div className="bestsellers_card">
-            <img alt="추천도서사진1" />
-            <p>도서순위: 1</p>
-            <p>도서명 : ㅇㅇㅇ</p>
-          </div>
-          <div className="bestsellers_card">
-            <img alt="추천도서사진2" />
-            <p>도서순위: 2</p>
-            <p>도서명 : ㅁㅁㅁ</p>
-          </div>
+      <div id="bestsellerBook_board">
+        <h1>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </h1>
+        <div id="bestseller_card_list">
+          {bestsellers.map((bestseller, index) => {
+            return (
+              <div className="bestseller_card">
+                <img alt="베스트셀러 사진" />
+                <div>{bestseller.id}</div>
+                <div>{bestseller.name}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div id="sale_book_board">
-        <p>판매도서</p>
+        <h1>판매도서</h1>
         <div id="saleBook_card_list">
           <div className="saleBook_card">
             <p>도서명 : ㅇㅇㅇ</p>
