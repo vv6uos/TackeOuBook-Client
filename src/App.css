@@ -24,55 +24,7 @@
   height: 200vh;
   width: 1024px;
 }
-#bestsellerBook_section {
-  height: 320px;
-  border: 4px solid black;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-}
-#bestsellerBook_section > p {
-  font-size: large;
-  margin: 4px;
-}
-#bestBook_card_list {
-  width: 900px;
-  height: 300px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  padding: 10px;
-}
-.bestbook_card {
-  width: 200px;
-  height: 250px;
-  border: black solid 2px;
-  margin-right: 15px;
-}
-#sale_book_board {
-  display: flex;
-  flex-direction: column;
-}
-#sale_book_board > p {
-  margin-top: 45px;
-  font-size: large;
-}
-#saleBook_card_list {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start 4px;
-  padding: 10px;
-}
-.saleBook_card {
-  width: 200px;
-  height: 250px;
-  border: black solid 2px;
-  margin-right: 15px;
-  margin-top: 20px;
-}
+
 
 #foot {
   height: 50px;

@@ -15,7 +15,9 @@ function App() {
       <div id="banner">
         <img alt="배너" />
       </div>
-      <MainPage />
+      <div id="body">
+        <MainPage />
+      </div>
       <div id="foot">@s6uos ALL RIGHTS RESERVED</div>
     </div>
   );
