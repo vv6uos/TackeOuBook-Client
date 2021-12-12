@@ -15,6 +15,17 @@
   height: 75px;
 }
 
+#menu_box {
+  display: flex;
+  flex-direction: row-reverse;
+  width: auto;
+  align-items: center;
+}
+.menu-button {
+  margin: 5px;
+  height: 30px;
+}
+
 #banner {
   height: auto;
   width: 1024px;
@@ -30,7 +41,7 @@
 #foot {
   height: 50px;
   width: 1024px;
-  background-color: aquamarine;
+  background-color: #00a199;
   display: flex;
   align-items: center;
   justify-content: center;

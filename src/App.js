@@ -8,8 +8,16 @@ function App() {
         <img src="/images/logo4.png" alt="로고이미지" />
         <div id="menu_box">
           {/* 메뉴아이콘만들기  */}
-          <img alt="회원가입/로그인" />
-          <img alt="상품올리기버튼 올리기" />
+          <img
+            className="menu-button"
+            src="/images/menu_button-login.jpg"
+            alt="회원가입/로그인"
+          />
+          <img
+            className="menu-button"
+            src="images/menu_button-upload.jpg"
+            alt="상품올리기버튼 올리기"
+          />
         </div>
       </div>
       <div id="banner">
