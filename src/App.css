@@ -1,9 +1,13 @@
 * {
-  margin: 0;
-  padding: 0;
+  font-family: "GyeonggiBatang";
 }
-
-
+@font-face {
+  font-family: "GyeonggiBatang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 #body {
   height: 200vh;
   width: 1024px;

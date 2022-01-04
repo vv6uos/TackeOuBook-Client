@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
+import { Link } from "react-router-dom";
+
 function MainPage() {
   const [bestsellers, setBestsellers] = useState([]);
   const [books, setBooks] = useState([]);
@@ -49,15 +51,17 @@ function MainPage() {
         <div id="saleBook_card_list">
           {books.map((book) => {
             return (
-              <div className="saleBook_card">
-                <img src={`${book.imgURL}`} alt="판매도서사진" />
-                <div className="saleBook_info">
-                  <p>{book.id}</p>
-                  <p>도 서 명:{book.name}</p>
-                  <p>판매가격:{book.price}원</p>
-                  <p>판 매 자:{book.seller}</p>
+              <Link to="/book">
+                <div className="saleBook_card">
+                  <img src={`${book.imgURL}`} alt="판매도서사진" />
+                  <div className="saleBook_info">
+                    <p>{book.id}</p>
+                    <p>도 서 명:{book.name}</p>
+                    <p>판매가격:{book.price}원</p>
+                    <p>판 매 자:{book.seller}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
