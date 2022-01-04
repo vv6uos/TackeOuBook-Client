@@ -3,36 +3,7 @@
   padding: 0;
 }
 
-#header {
-  height: 80px;
-  width: 1024px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-#header > img {
-  height: 75px;
-}
-
-#menu_box {
-  display: flex;
-  flex-direction: row-reverse;
-  width: auto;
-  align-items: center;
-}
-.menu-button {
-  margin: 5px;
-  height: 30px;
-}
-
-#banner {
-  height: auto;
-  width: 1024px;
-}
-#banner > img {
-  width: inherit;
-}
 #body {
   height: 200vh;
   width: 1024px;

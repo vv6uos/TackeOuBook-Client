@@ -1,3 +1,10 @@
+#banner {
+  height: auto;
+  width: 1024px;
+}
+#banner > img {
+  width: inherit;
+}
 #bestsellerBook_board {
   height: 320px;
   border: 1px solid #6a3906;
