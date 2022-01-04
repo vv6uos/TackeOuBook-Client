@@ -1,26 +1,36 @@
 import "./App.css";
 import MainPage from "./main";
 import UploadPage from "./upload";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import LoginPage from "./login";
+import React from "react";
 
 function App() {
+  const movePage = function () {
+    console.log("페이지이동");
+  };
   return (
     <div>
       <div id="header">
-        <img src="/images/logo4.png" alt="로고이미지" />
+        <Link to="/" onClick={movePage}>
+          <img id="logo" src="/images/logo4.png" alt="로고이미지" />
+        </Link>
         <div id="menu_box">
           {/* 메뉴아이콘만들기  */}
-          <img
-            className="menu-button"
-            src="/images/menu_button-login.jpg"
-            alt="회원가입/로그인"
-          />
-          <img
-            className="menu-button"
-            src="images/menu_button-upload.jpg"
-            alt="상품올리기버튼 올리기"
-          />
+          <Link to="/login">
+            <img
+              className="menu-button"
+              src="/images/menu_button-login.jpg"
+              alt="회원가입/로그인"
+            />
+          </Link>
+          <Link to="/upload">
+            <img
+              className="menu-button"
+              src="images/menu_button-upload.jpg"
+              alt="상품올리기버튼 올리기"
+            />
+          </Link>
         </div>
       </div>
       <div id="banner">
@@ -28,9 +38,9 @@ function App() {
       </div>
       <div id="body">
         <Routes>
-          <Route exact={true} path={"/"} element={<MainPage />} />
-          <Route exact={true} path={"/upload"} element={<UploadPage />} />
-          <Route exact={true} path={"/login"} element={<LoginPage />} />
+          <Route path={"/upload"} element={<UploadPage />} />
+          <Route path={"/"} element={<MainPage />} />
+          <Route path={"/login"} element={<LoginPage />} />
         </Routes>
       </div>
       <div id="foot">@s6uos ALL RIGHTS RESERVED</div>
