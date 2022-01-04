@@ -1,5 +1,8 @@
 import "./App.css";
 import MainPage from "./main";
+import UploadPage from "./upload";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./login";
 
 function App() {
   return (
@@ -24,7 +27,11 @@ function App() {
         <img src="/images/banner-002.png" alt="배너" />
       </div>
       <div id="body">
-        <MainPage />
+        <Routes>
+          <Route exact={true} path={"/"} element={<MainPage />} />
+          <Route exact={true} path={"/upload"} element={<UploadPage />} />
+          <Route exact={true} path={"/login"} element={<LoginPage />} />
+        </Routes>
       </div>
       <div id="foot">@s6uos ALL RIGHTS RESERVED</div>
     </div>
