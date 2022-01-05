@@ -17,7 +17,7 @@ function App() {
           <Route path={"/upload"} element={<UploadPage />} />
           <Route path={"/"} element={<MainPage />} />
           <Route path={"/login"} element={<LoginPage />} />
-          <Route path={"/book"} element={<DetailPage />} />
+          <Route path={"/books/:id"} element={<DetailPage />} />
         </Routes>
       </div>
       <div id="foot">@s6uos ALL RIGHTS RESERVED</div>

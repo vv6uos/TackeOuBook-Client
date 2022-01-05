@@ -22,7 +22,9 @@ function MainPage() {
       const books = result.data.books;
       setBooks(books);
       console.log("판매도서 데이터 전송 성공 : ", books);
-    });
+    }).catch((err) => {
+        console.log("실패 :", err);
+      });
   }, []);
 
   return (
@@ -51,7 +53,7 @@ function MainPage() {
         <div id="saleBook_card_list">
           {books.map((book) => {
             return (
-              <Link to="/book">
+              <Link to={`/books/${book.id}`}>
                 <div className="saleBook_card">
                   <img src={`${book.imgURL}`} alt="판매도서사진" />
                   <div className="saleBook_info">

@@ -1,18 +1,43 @@
 import "./index.css";
+import { useParams } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 
 function DetailPage() {
+  const { id } = useParams([]);
+  const [books, setBooks] = useState();
+  const [book, setBook] = useState();
+  console.log("비동기처리test", books, book);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/books")
+      .then((result) => {
+        console.log(result);
+        const books = result.data.books;
+        const book = books.find((book) => {
+          return book.id === id;
+        });
+        setBooks(books);
+        setBook(book);
+      })
+      .catch((err) => {
+        console.log("실패");
+      });
+  }, [id]);
+  if (book === undefined) {
+    return <span>상품정보를 받아오고 있는중입니다.</span>;
+  }
+
   return (
     <main>
-      <br />
       <header>
-        <div id="info-name">작별하지 않는다 font확인용</div>
+        <div id="info-name"></div>
       </header>
-      <br />
       <body>
         {/*왼쪽 도서 이미지 구역시작*/}
         <div id="left">
           <div id="image-frame">
-            <img src="/images/books/book3.jpg" alt="책이미지" id="image" />
+            <img alt="책이미지" id="image" />
           </div>
         </div>
         {/*오른쪽 도서 상세정보 구역 시작*/}
@@ -20,11 +45,11 @@ function DetailPage() {
           <div id="info-box">
             <div className="info">
               <div>판매자</div>
-              <span id="seller">제인</span>
+              <span id="seller"></span>
             </div>
             <div className="info">
               <div>판매가</div>
-              <span id="price">5000원</span>
+              <span id="price"></span>
             </div>
             <div className="info">
               <div>상품상태</div>
