@@ -6,7 +6,8 @@
 .pnp.js
 README.md
 /public/images
-package-lock.json
+/package-lock.json
+
 
 # testing
 /coverage

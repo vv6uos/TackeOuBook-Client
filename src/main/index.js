@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
+import "../config/constants.js";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config/constants.js";
 
 function MainPage() {
   const [bestsellers, setBestsellers] = useState([]);
@@ -9,20 +11,23 @@ function MainPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/bestsellers")
+      .get(`${API_URL}/bestsellers`)
       .then((result) => {
-        const bestsellers = result.data.bestsellers;
+        const bestsellers = result.data;
         console.log("베스트셀러 데이터 전송 성공 : ", bestsellers);
         setBestsellers(bestsellers);
       })
       .catch((err) => {
         console.log("실패 :", err);
       });
-    axios.get("http://localhost:8080/books").then((result) => {
-      const books = result.data.books;
-      setBooks(books);
-      console.log("판매도서 데이터 전송 성공 : ", books);
-    }).catch((err) => {
+    axios
+      .get(`${API_URL}/books`)
+      .then((result) => {
+        const books = result.data;
+        setBooks(books);
+        console.log("판매도서 데이터 전송 성공 : ", books);
+      })
+      .catch((err) => {
         console.log("실패 :", err);
       });
   }, []);

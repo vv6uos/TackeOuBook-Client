@@ -2,6 +2,8 @@ import "./index.css";
 import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import axios from "axios";
+import "../config/constants.js";
+import { API_URL } from "../config/constants.js";
 
 function DetailPage() {
   const { id } = useParams([]);
@@ -10,18 +12,18 @@ function DetailPage() {
   console.log("비동기처리test", books, book);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/books")
+      .get(`${API_URL}/books`)
       .then((result) => {
         console.log(result);
-        const books = result.data.books;
+        const books = result.data;
         const book = books.find((book) => {
-          return book.id === id;
+          return book.id === Number(id);
         });
         setBooks(books);
         setBook(book);
       })
       .catch((err) => {
-        console.log("실패");
+        console.log("실패", err);
       });
   }, [id]);
   if (book === undefined) {
@@ -31,13 +33,17 @@ function DetailPage() {
   return (
     <main>
       <header>
-        <div id="info-name"></div>
+        <div id="info-name">
+          {book.id}
+          {`        `}
+          {book.name}
+        </div>
       </header>
       <body>
         {/*왼쪽 도서 이미지 구역시작*/}
         <div id="left">
           <div id="image-frame">
-            <img alt="책이미지" id="image" />
+            <img src={`${book.imgURL}`} alt="책이미지" id="image" />
           </div>
         </div>
         {/*오른쪽 도서 상세정보 구역 시작*/}
@@ -45,11 +51,11 @@ function DetailPage() {
           <div id="info-box">
             <div className="info">
               <div>판매자</div>
-              <span id="seller"></span>
+              <span id="seller">{book.seller}</span>
             </div>
             <div className="info">
               <div>판매가</div>
-              <span id="price"></span>
+              <span id="price">{book.price}</span>
             </div>
             <div className="info">
               <div>상품상태</div>
