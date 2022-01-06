@@ -2,24 +2,19 @@ import "./index.css";
 import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import "../config/constants.js";
 import { API_URL } from "../config/constants.js";
+
 
 function DetailPage() {
   const { id } = useParams([]);
-  const [books, setBooks] = useState();
   const [book, setBook] = useState();
-  console.log("비동기처리test", books, book);
+  console.log("비동기처리test", book);
   useEffect(() => {
     axios
-      .get(`${API_URL}/books`)
+      .get(`${API_URL}/books/${id}`)
       .then((result) => {
         console.log(result);
-        const books = result.data;
-        const book = books.find((book) => {
-          return book.id === Number(id);
-        });
-        setBooks(books);
+        const book = result.data;
         setBook(book);
       })
       .catch((err) => {
