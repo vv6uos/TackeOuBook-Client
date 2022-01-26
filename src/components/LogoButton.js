@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Theme from "../style/theme";
 import Button from "./styled/Button";
 
 const { fonts } = Theme;
 
 function LogoButton() {
+  const navigate = useNavigate();
   return (
     <Button
       width="30vw"
@@ -11,14 +13,12 @@ function LogoButton() {
       minWidth="190px"
       fontFam={fonts.l}
       fontSize="4rem"
-      onClick={moveHome}
+      onClick={() => {
+        navigate("/");
+      }}
     >
       송은도서관
     </Button>
   );
 }
-function moveHome() {
-  window.open("http://localhost:3000");
-}
-
 export default LogoButton;
