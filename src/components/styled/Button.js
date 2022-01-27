@@ -24,13 +24,14 @@ const DefaultStyle = css`
   text-align: center;
   padding: 0.8rem;
   margin: 0.4rem;
+  cursor: pointer;
 
   border: none;
 `;
 
 const BasicStyle = styled.button`
   ${DefaultStyle};
-  width: ${(props) => props.width || "10vw"};
+  width: ${(props) => props.width || "8rem"};
   max-width: ${(props) => props.maxWidth || "120px"};
   min-width: ${(props) => props.minWidth || "45px"};
   font-family: ${(props) => props.fontFam || fonts.s};

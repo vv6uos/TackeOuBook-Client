@@ -8,8 +8,8 @@ function LogoButton() {
   const navigate = useNavigate();
   return (
     <Button
-      width="30vw"
-      maxWidth="250px"
+      width="20rem"
+      maxWidth="300px"
       minWidth="190px"
       fontFam={fonts.l}
       fontSize="4rem"
