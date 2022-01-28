@@ -15,7 +15,7 @@ function Button({ children, onClick, ...props }) {
 export default Button;
 
 //Style
-const DefaultStyle = css`
+const defaultStyle = css`
   box-sizing: content-box;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -30,7 +30,7 @@ const DefaultStyle = css`
 `;
 
 const BasicStyle = styled.button`
-  ${DefaultStyle};
+  ${defaultStyle};
   width: ${(props) => props.width || "8rem"};
   max-width: ${(props) => props.maxWidth || "120px"};
   min-width: ${(props) => props.minWidth || "45px"};

@@ -1,13 +1,20 @@
+//-----import 외부 소스
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 
-import MainPage from "Pages/MainPage/Index";
-import UploadPage from "Pages/UploadPage";
-import LoginPage from "Pages/LoginPage";
-import Header from "components/Header";
-import TestPage from "Pages/TestPage/TestPage";
-import DetailPage from "Pages/DetailPage";
-import GlobalStyle from "style/globalStyle";
+//-----import 내부
+import {
+  MainPage,
+  LoginPage,
+  DetailPage,
+  RegisterPage,
+  UploadPage,
+  TestPage,
+  Header,
+} from "Pages/index";
+import { myCSS, myTheme, GlobalStyle } from "style/index";
+
+const { colors } = myTheme;
 
 function App() {
   return (

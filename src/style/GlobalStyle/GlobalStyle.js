@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
-import { Downloadfonts } from "./downloadFonts";
+import { downloadfonts } from "./downloadFonts";
 
 const GlobalStyle = createGlobalStyle`
-    ${Downloadfonts}
+    ${downloadfonts}
 
   *, *::before, *::after {
     box-sizing: border-box;

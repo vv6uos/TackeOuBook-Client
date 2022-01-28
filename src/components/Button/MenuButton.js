@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Button from "./styled/Button";
+import Button from "./Button";
 
 function MenuButton({ children, moveTo }) {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-export const Downloadfonts = css`
+export const downloadfonts = css`
   @font-face {
     font-family: "GmarketSansBold";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")

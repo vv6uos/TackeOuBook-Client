@@ -1,13 +1,23 @@
 import styled from "styled-components";
-import Theme from "../../style/theme";
 
-const { colors, fonts } = Theme;
+export default function InputWithLabel({ children, ...rest }) {
+  return (
+    <Box>
+      <Label>{children}</Label>
+      <Input {...rest} />
+    </Box>
+  );
+}
+
 const Box = styled.label`
   display: flex;
   height: 2rem;
   font-size: 1.2rem;
-  margin: 0.5rem;
   max-width: 300px;
+
+  & + & {
+    margin: 0.5rem;
+  }
 `;
 
 const Label = styled.label`
@@ -17,21 +27,12 @@ const Label = styled.label`
   line-height: 2rem;
 `;
 
-const InputBlock = styled.input`
+const Input = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   outline-style: none;
   border: none;
   width: 13.3rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
 `;
-
-export default function Input({ children, placeholder, type }) {
-  return (
-    <Box>
-      <Label>{children}</Label>
-      <InputBlock placeholder={placeholder} type={type} />
-    </Box>
-  );
-}

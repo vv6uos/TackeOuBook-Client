@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Theme from "../style/theme";
-import Button from "./styled/Button";
+import Theme from "../../style/theme";
+import Button from "./Button";
 
 const { fonts } = Theme;
 
