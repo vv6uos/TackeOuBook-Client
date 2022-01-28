@@ -1,17 +1,16 @@
-//외부
+//-----외부
 import styled from "styled-components";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
 
-//내부
+//-----내부
 import { API_URL } from "config/constants";
-import FlexBoxes from "components/styled/FlexBoxes";
 import Theme from "style/theme";
+import myCSS from "style/favoriteCss";
 
-const { FlexBox, ColumnBox } = FlexBoxes;
 const { fontStyles } = Theme;
 
-//index
+//-----메인 함수
 
 function BestSellers() {
   const [bestsellers, setBestsellers] = useState([]);
@@ -20,53 +19,27 @@ function BestSellers() {
   }, []);
 
   return (
-    <ColumnBox>
-      <H3>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </H3>
-      <FlexBox>
+    <Wrapper>
+      <Title>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </Title>
+      <Container alt="베스트셀러">
         {bestsellers.map((bestseller) => {
           return (
             <Card>
-              <BestsellerImg
-                src={`${bestseller.imgURL}`}
-                alt="베스트셀러 사진"
-              />
-              <BestsellerInfo>
+              <BookImg src={`${bestseller.imgURL}`} alt="베스트셀러 사진" />
+              <BookInfoBox>
                 <p>{bestseller.id}</p>
                 <p>{bestseller.name}</p>
-              </BestsellerInfo>
+              </BookInfoBox>
             </Card>
           );
         })}
-      </FlexBox>
-    </ColumnBox>
+      </Container>
+    </Wrapper>
   );
 }
 export default BestSellers;
 
-//스타일
-
-const H3 = styled.h3`
-  ${fontStyles.semiTitle}
-`;
-
-const Card = styled.div`
-  margin: 1.5rem auto;
-  width: 100%;
-  max-width: 250px;
-  ${fontStyles.body};
-`;
-const BestsellerImg = styled.img`
-  display: block;
-  margin: 0 auto;
-  height: 24vmin;
-  max-height: 270px;
-`;
-
-const BestsellerInfo = styled.div`
-  padding: 0 2vmin;
-`;
-
-//함수
+//-----함수
 
 function AxiosBestsellers({ setBestsellers }) {
   axios
@@ -80,3 +53,32 @@ function AxiosBestsellers({ setBestsellers }) {
       console.log("실패 :", err);
     });
 }
+
+//-----스타일
+const Wrapper = styled.div`
+  ${myCSS.flexColumn}
+`;
+const Title = styled.div`
+  ${fontStyles.semiTitle}
+`;
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const Card = styled.div`
+  margin: 1.5rem auto;
+  width: 100%;
+  max-width: 250px;
+  ${fontStyles.body};
+`;
+const BookImg = styled.img`
+  display: block;
+  margin: 0 auto;
+  height: 24vmin;
+  max-height: 270px;
+`;
+
+const BookInfoBox = styled.div`
+  padding: 0 2vmin;
+`;

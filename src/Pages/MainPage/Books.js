@@ -1,17 +1,17 @@
-//외부
+//-----외부 소스
 import { React, useState, useEffect } from "react";
+
 import styled from "styled-components";
 import axios from "axios";
 
-//내부
+//-----내부 소스
 import { API_URL } from "config/constants";
-import Theme from "style/theme";
-import FlexBoxes  from "components/styled/FlexBoxes";
+import { myCSS, myTheme } from "style";
+import { MyLink } from "components";
 
-const { fontStyles } = Theme;
-const { WrapBox } = FlexBoxes;
+const { fontStyles } = myTheme;
 
-//index
+
 function Books() {
   const [books, setBooks] = useState([]);
   useEffect(() => {
@@ -19,61 +19,31 @@ function Books() {
   }, []);
 
   return (
-    <>
-      <H1>대여 가능 도서</H1>
-      <WrapBox>
+    <Wrapper>
+      <Title>대여 가능 도서</Title>
+      <Container name="대여가능도서">
         {books.map((book) => {
           return (
-            <LinkCard bookId={`${book.id}`}>
-              <BookImg src={`${book.imgURL}`} alt="판매도서사진" />
-              <BookInfo>
-                <p>{book.id}</p>
-                <p>도 서 명: {book.name}</p>
-                <p>판매가격: {book.price.toLocaleString()}원</p>
-                <p>판 매 자: {book.seller}</p>
-              </BookInfo>
-            </LinkCard>
+            <Card>
+              <MyLink to={`/books/${book.id}`}>
+                <BookImg src={`${book.imgURL}`} alt="도서사진" />
+                <BookInfoBox>
+                  <p>{book.id}</p>
+                  <p>도 서 명: {book.name}</p>
+                  <p>대여가격: {book.price.toLocaleString()}원</p>
+                  <p>저 자: {book.seller}</p>
+                </BookInfoBox>
+              </MyLink>
+            </Card>
           );
         })}
-      </WrapBox>
-      판매도서 카드 만들기 판매완료된 도서는 회색으로 솔드아웃표시{" "}
-    </>
+      </Container>
+    </Wrapper>
   );
 }
 export default Books;
 
-//style
-const H1 = styled.h1`
-  ${fontStyles.mainTitle}
-`;
-
-const LinkCard = ({ bookId, children }) => {
-  const href = `/books/${bookId}`;
-  return (
-    <Card as="a" href={href} bookId={bookId}>
-      {children}
-    </Card>
-  );
-};
-
-const Card = styled.div`
-  margin: 1.5rem 0.6rem;
-  flex-basis: 20rem;
-  text-decoration: none;
-  ${fontStyles.body};
-`;
-
-const BookImg = styled.img`
-  display: block;
-  margin: 0 auto;
-  height: 27rem;
-`;
-
-const BookInfo = styled.div`
-  padding: 0 1.5vw;
-`;
-
-//function
+//-----함수
 
 function AxiosBooks({ setBooks }) {
   axios
@@ -87,3 +57,33 @@ function AxiosBooks({ setBooks }) {
       console.log("실패 :", err);
     });
 }
+
+//-----스타일
+const Wrapper = styled.div`
+  ${myCSS.flexColumn}
+`;
+const Title = styled.h1`
+  ${fontStyles.mainTitle}
+`;
+const Container = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+`;
+
+const Card = styled.div`
+  margin: 1.5rem 0.6rem;
+  flex-basis: 20rem;
+
+  ${fontStyles.body};
+`;
+
+const BookImg = styled.img`
+  display: block;
+  margin: 0 auto;
+  height: 27rem;
+`;
+
+const BookInfoBox = styled.div`
+  padding: 0 1.5vw;
+  text-decoration: none;
+`;

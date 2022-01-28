@@ -1,15 +1,15 @@
+//-----외부 소스
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "config/constants";
 import styled from "styled-components";
 
-import Theme from "style/theme";
-import FlexBoxes from "components/styled/FlexBoxes";
-import Button from "components/styled/Button";
+//-----내부 소스
+import Button from "components/Button/Button";
+import { API_URL } from "config/constants";
+import { myCSS, myTheme } from "style";
 
-const { fontStyles, colors } = Theme;
-const { FlexBox, ColumnBox } = FlexBoxes;
+const { fontStyles, colors } = myTheme;
 
 function DetailPage() {
   const { id } = useParams([]);
@@ -23,15 +23,13 @@ function DetailPage() {
   }
 
   return (
-    <>
+    <Wrapper>
       <TitleBox>
-        <h1>
-          ` {book.id} {book.name}`
-        </h1>
+        `{book.id} {book.name}`
       </TitleBox>
-      <FlexBox>
+      <Container>
         <Img src={`${book.imgURL}`} alt="책이미지" id="image" />
-        <ColumnBox>
+        <Box>
           <InfoBox>
             <Info>
               <Label>판매자</Label>
@@ -50,26 +48,54 @@ function DetailPage() {
               <div className="info">투자명인 ㅇㅇㅇㅇ가 썼씁니다</div>
             </Info>
           </InfoBox>
-          <Button>대여하기</Button>
-        </ColumnBox>
-      </FlexBox>
-    </>
+          <Button onClick={onClickRent}>대여하기</Button>
+        </Box>
+      </Container>
+    </Wrapper>
   );
 }
 
 export default DetailPage;
 
-//style
+//----- 함수
 
+function AxiosBook({ setBook, id }) {
+  axios
+    .get(`${API_URL}/books/${id}`)
+    .then((result) => {
+      const book = result.data;
+      setBook(book);
+      console.log("판매도서 데이터 전송 성공 : ", book);
+    })
+    .catch((err) => {
+      console.log("실패 :", err);
+    });
+}
+
+function onClickRent() {
+  console.log("대여하기 버튼 클릭");
+}
+//----- 스타일
+const Wrapper = styled.div``;
 const TitleBox = styled.div`
   ${fontStyles.mainTitle}
-  border-bottom: 1.5px solid ${colors.c4}
+  margin-top: 5rem;
+  height: 5rem;
+  padding: 1.5rem;
+  border-bottom: 2px solid ${colors.c44};
+`;
+const Container = styled.div`
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 const Img = styled.img`
-  height: 40vmin;
-  max-height: 500px;
+  height: 30rem;
 `;
-
+const Box = styled.div`
+  ${myCSS.flexColumn}
+`;
 const InfoBox = styled.div`
   width: 60vmin;
   min-width: 200px;
@@ -93,17 +119,3 @@ const Label = styled.div`
   min-width: 50px;
   max-width: 100px;
 `;
-//function
-
-function AxiosBook({ setBook, id }) {
-  axios
-    .get(`${API_URL}/books/${id}`)
-    .then((result) => {
-      const book = result.data;
-      setBook(book);
-      console.log("판매도서 데이터 전송 성공 : ", book);
-    })
-    .catch((err) => {
-      console.log("실패 :", err);
-    });
-}
