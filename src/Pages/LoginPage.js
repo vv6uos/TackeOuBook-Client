@@ -1,62 +1,62 @@
+//-----import 외부 소스
 import styled from "styled-components";
-import Theme from "style/theme";
-import Input from "components/styled/Input";
-import Button from "components/styled/Button";
+import { Link } from "react-router-dom";
 
-const { colors, fontStyles } = Theme;
+//-----import 내부 소스
+import { InputWithLabel, Button } from "components/index";
+import { myCSS, myTheme } from "style/index";
+
+const { colors, fontStyles } = myTheme;
 
 function LoginPage() {
   return (
-    <Box>
+    <Wrapper>
       <Container>
         <Title>로그인</Title>
         <Form>
-          <Input>아이디</Input>
-          <Input type="password">비밀번호</Input>
-          <Button width="20rem" maxWidth="250px">
+          <InputWithLabel type="text" required>
+            아이디
+          </InputWithLabel>
+          <InputWithLabel type="password" required>
+            비밀번호
+          </InputWithLabel>
+          <Button type="submit" width="20rem" maxWidth="250px">
             로그인
           </Button>
         </Form>
-        <Nav>| 회원가입</Nav>
+        <LinktoRegister to="/register">회원가입</LinktoRegister>
       </Container>
-    </Box>
+    </Wrapper>
   );
 }
-
 export default LoginPage;
 
-const Box = styled.div`
-  max-width: 26.6rem;
+//-----스타일
+const Wrapper = styled.div`
+  ${myCSS.center}
+  width: 26.6rem;
 
   background-color: ${colors.c2};
-
-  margin-left: auto;
-  margin-right: auto;
 
   margin-top: 5rem;
   padding: 2rem;
 `;
-
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${myCSS.flexColumn}
   align-items: center;
 `;
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
+  ${myCSS.flexColumn}
   align-items: center;
-
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 `;
-
 const Title = styled.div`
   ${fontStyles.semiTitle}
 `;
-
-const Nav = styled.div`
-  ${fontStyles.body};
+const LinktoRegister = styled(Link)`
+  ${fontStyles.mini};
   align-self: flex-end;
   margin: 0.4rem;
+  text-decoration: none;
 `;

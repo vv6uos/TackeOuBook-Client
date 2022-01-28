@@ -24,11 +24,12 @@ function App() {
         <Header />
         <Body>
           <Routes>
-            <Route path={"/upload"} element={<UploadPage />} />
             <Route path={"/"} element={<MainPage />} />
-            <Route path={"/login"} element={<LoginPage />} />
+            <Route path={"/upload"} element={<UploadPage />} />
             <Route path={"/books/:id"} element={<DetailPage />} />
             <Route path={"/test"} element={<TestPage />} />
+            <Route path={"/login"} element={<LoginPage />} />
+            <Route path={"/register"} element={<RegisterPage />} />
           </Routes>
         </Body>
         <Footer>@s6uos ALL RIGHTS RESERVED</Footer>
@@ -36,30 +37,22 @@ function App() {
     </>
   );
 }
+export default App;
 
+//-----스타일
 const Wrapper = styled.div`
   max-width: 1024px;
   min-width: 300px;
 
-  margin-left: auto;
-  margin-right: auto;
-
-  display: flex;
-  flex-direction: column;
+  ${myCSS.center}
+  ${myCSS.flexColumn}
 `;
 
 const Footer = styled.footer`
-  width: 100%;
-  height: 15vh;
+  height: 8rem;
   color: white;
-  background-color: gray;
-  margin-top: 3vh;
+  background-color: ${colors.c2};
 `;
-const Body = styled.body`
-  margin: 0;
-  font-family: "GmarketSansMedium", "Arial", sans-serif;
-  line-height: 1.2;
+const Body = styled.div`
   min-height: 70vh;
 `;
-
-export default App;
