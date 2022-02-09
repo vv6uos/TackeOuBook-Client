@@ -10,6 +10,8 @@ function Header() {
       <MenuBox>
         <MenuButton moveTo="/login">로그인</MenuButton>
         <MenuButton moveTo="/upload">업로드</MenuButton>
+        <MenuButton moveTo="/register">회원가입</MenuButton>
+        <MenuButton moveTo="/test">테스트</MenuButton>
       </MenuBox>
     </HeaderBox>
   );
@@ -24,7 +26,7 @@ const HeaderBox = styled.div`
   height: 8rem;
   display: flex;
   justify-content: space-between;
-  background-color: ${colors.c3};
+  background-color: ${colors.m1};
 `;
 
 const MenuBox = styled.div`

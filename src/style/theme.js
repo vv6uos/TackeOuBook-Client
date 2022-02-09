@@ -1,10 +1,14 @@
 import { css } from "styled-components";
 
 const colors = {
-  c1: "white",
-  c2: "rgb(236, 236, 236)",
-  c3: "palevioletred",
-  c4: "rgba(29, 15, 25, 0.925)",
+  //main colors
+  bg: "#FFFAEF",
+  m1: "#1C5E75",
+  m2: "#903909",
+  l1: "#FFFAEF",
+  l2: "#FFF5E3",
+  d1: "#676767",
+  d2: "#3D3D3D",
 };
 
 const fonts = {
@@ -16,21 +20,21 @@ const fonts = {
 const fontStyles = {
   mainTitle: css`
     font-family: ${fonts.l};
-    color: ${colors.c4};
-    font-size: 2rem;
+    color: ${colors.d2};
+    font-size: 3rem;
   `,
   semiTitle: css`
-    font-family: ${fonts.m};
-    color: ${colors.c4};
+    font-family: ${fonts.l};
+    color: ${colors.d2};
     font-size: 1.5rem;
   `,
   body: css`
-    font-family: ${fonts.s};
-    color: ${colors.c4};
+    font-family: ${fonts.d2};
+    color: ${colors.d1};
     font-size: 1rem;
   `,
   mini: css`
-    font-family: ${fonts.s};
+    font-family: ${fonts.d1};
     color: gray;
     font-size: 0.6rem;
   `,

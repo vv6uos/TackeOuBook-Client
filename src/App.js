@@ -41,7 +41,7 @@ export default App;
 
 //-----스타일
 const Wrapper = styled.div`
-  max-width: 1024px;
+  max-width: 1200px;
   min-width: 300px;
 
   ${myCSS.center}
@@ -51,8 +51,8 @@ const Wrapper = styled.div`
 const Footer = styled.footer`
   height: 8rem;
   color: white;
-  background-color: ${colors.c2};
+  background-color: ${colors.d1};
 `;
 const Body = styled.div`
-  min-height: 70vh;
+  min-height: 90vh;
 `;

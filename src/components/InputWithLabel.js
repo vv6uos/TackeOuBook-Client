@@ -1,37 +1,36 @@
 import styled, { css } from "styled-components";
-import { useState } from "react";
+
+//내부
+import { myTheme } from "style/index";
 
 export default function InputWithLabel({
   children,
   flexDirection,
   labelWidth,
   itemHeight,
+  InvalidMessage,
+  inputWidth,
 
   ...rest
 }) {
-  const [mode, setMode] = useState("default");
-
-  function onChangeMode() {
-    setMode("confirm");
-  }
   return (
     <Item flexDirection={flexDirection} itemHeight={itemHeight}>
-      <Label labelWidth={labelWidth} itemHeight>
-        {children}
-      </Label>
-      <Input $invalidmode={mode} onKeyUp={onChangeMode} {...rest} />
+      <Label labelWidth={labelWidth}>{children}</Label>
+      <Input inputWidth={inputWidth} {...rest} />
+      <Message>{InvalidMessage}</Message>
     </Item>
   );
 }
+
+const { fonts, colors, fontStyles } = myTheme;
 
 const Item = styled.div`
   display: flex;
   flex-direction: ${(p) => p.flexDirection || "row"};
   height: ${(p) => p.itemHeight || "2rem"};
-  font-size: 1.2rem;
   max-width: 300px;
-  margin: 0.6rem;
-  }
+  margin-bottom: 0.5rem;
+}
 `;
 
 const Label = styled.label`
@@ -39,6 +38,8 @@ const Label = styled.label`
   min-width: 60px;
   color: gray;
   line-height: 2rem;
+  font-family: ${fonts.m};
+  font-size: 1.2rem;
 `;
 
 const Input = styled.input`
@@ -46,23 +47,13 @@ const Input = styled.input`
   -moz-appearance: none;
   appearance: none;
   outline-style: none;
-  border: none;
+  border: 0.5px solid ${colors.d1};
   width: ${(p) => p.inputWidth || "13.3rem"};
   font-size: 1rem;
   height: 2rem;
+`;
 
-  :invalid {
-    ${(p) => {
-      switch (p.$invalidmode) {
-        case "confirm":
-          return css`
-            border: 1px solid red;
-          `;
-        default:
-          return css`
-            border: none;
-          `;
-      }
-    }}
-  }
+const Message = styled.div`
+  font-size: 1rem;
+  color: ${colors.m2};
 `;

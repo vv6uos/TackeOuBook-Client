@@ -82,10 +82,12 @@ const TitleBox = styled.div`
   margin-top: 5rem;
   height: 5rem;
   padding: 1.5rem;
-  border-bottom: 2px solid ${colors.c44};
+  border-bottom: 2px solid ${colors.d1};
 `;
 const Container = styled.div`
-  margin-top: 5rem;
+  background-color: ${colors.l1};
+  padding-top: 5rem;
+  padding-bottom: 5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

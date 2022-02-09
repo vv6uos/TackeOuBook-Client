@@ -27,6 +27,11 @@ const defaultStyle = css`
   cursor: pointer;
 
   border: none;
+
+  :disabled {
+    background-color: ${colors.l2}
+    opacity: 0.7;
+  }
 `;
 
 const BasicStyle = styled.button`
@@ -37,6 +42,6 @@ const BasicStyle = styled.button`
   font-family: ${(props) => props.fontFam || fonts.s};
   font-size: ${(props) => props.fontSize || "1.2rem"};
 
-  background-color: ${(props) => props.bgColor || colors.c3};
-  color: ${(props) => props.color || colors.c1};
+  background-color: ${(props) => props.bgColor || colors.m2};
+  color: ${(props) => props.color || colors.l2};
 `;

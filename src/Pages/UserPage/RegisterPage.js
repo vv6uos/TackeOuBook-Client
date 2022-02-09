@@ -211,11 +211,12 @@ const Wrapper = styled.div`
   ${myCSS.center}
   width: 40rem;
 
-  background-color: ${colors.c2};
+  background-color: ${colors.l1};
 
   margin-top: 5rem;
   margin-bottom: 5rem;
   padding: 2rem;
+  border-radius: 5% 5%;
 `;
 
 const Form = styled.form`

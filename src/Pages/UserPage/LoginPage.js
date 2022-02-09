@@ -74,8 +74,10 @@ const Wrapper = styled.div`
   ${myCSS.center}
   width: 26.6rem;
 
-  background-color: ${colors.c2};
+  background-color: ${colors.l1};
+  border-radius: 5% 5%;
 
+  margin: auto;
   margin-top: 5rem;
   padding: 2rem;
 `;

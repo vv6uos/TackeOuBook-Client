@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Theme from "../../style/theme";
 import Button from "./Button";
 
-const { fonts } = Theme;
+const { fonts, colors } = Theme;
 
 function LogoButton() {
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ function LogoButton() {
       maxWidth="300px"
       minWidth="190px"
       fontFam={fonts.l}
+      bgColor={colors.m1}
       fontSize="4rem"
       onClick={() => {
         navigate("/");
