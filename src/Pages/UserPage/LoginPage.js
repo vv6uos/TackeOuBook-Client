@@ -12,49 +12,47 @@ import { API_URL } from "config/constants";
 const { colors, fontStyles } = myTheme;
 
 function LoginPage() {
-  const [id, setId] = useState(null);
-  const [password, setPassword] = useState(null);
-
-  const values = { id, password };
-
-  const onIdHandler = (e) => {
-    setId(e.currentTarget.value);
-  };
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
+  const [inputs, setInputs] = useState({
+    id: "",
+    password: "",
+  });
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${API_URL}/users/login`, {
-        user_id: values.id,
-        password: values.password,
-      })
-      .then((result) => {
-        alert("로그인 성공");
-      })
-      .catch((err) => {
-        alert("로그인 실패!");
-      });
+    console.log(inputs);
+    if (inputs.id.length > 4 && inputs.password.length >= 4) {
+      axios
+        .post(`${API_URL}/users/login`, {
+          user_id: inputs.id,
+          password: inputs.password,
+        })
+        .then((result) => {
+          alert("로그인 성공");
+        })
+        .catch((err) => {
+          alert("로그인 실패!");
+        });
+    } else alert("아이디와 비밀번호를 확인부탁드립니다.");
   };
   return (
     <Wrapper>
       <Container>
         <Title>로그인</Title>
         <Form onSubmit={onSubmit}>
-          <InputWithLabel
-            type="text"
-            value={id}
-            onChange={onIdHandler}
-            required
-          >
+          <InputWithLabel type="text" name="id" onChange={onChange} required>
             아이디
           </InputWithLabel>
           <InputWithLabel
             type="password"
-            value={password}
-            onChange={onPasswordHandler}
+            name="password"
+            onChange={onChange}
             required
           >
             비밀번호
