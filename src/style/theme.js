@@ -27,7 +27,7 @@ const fontStyles = {
   semiTitle: css`
     font-family: ${fonts.l};
     color: ${colors.d2};
-    font-size: 1.5rem;
+    font-size: 2rem;
   `,
   body: css`
     font-family: ${fonts.d2};

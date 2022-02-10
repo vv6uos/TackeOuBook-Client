@@ -8,16 +8,15 @@ export default function InputWithLabel({
   flexDirection,
   labelWidth,
   itemHeight,
-  InvalidMessage,
   inputWidth,
+  inputHeight,
 
   ...rest
 }) {
   return (
     <Item flexDirection={flexDirection} itemHeight={itemHeight}>
       <Label labelWidth={labelWidth}>{children}</Label>
-      <Input inputWidth={inputWidth} {...rest} />
-      <Message>{InvalidMessage}</Message>
+      <Input inputHeight={inputHeight} inputWidth={inputWidth} {...rest} />
     </Item>
   );
 }
@@ -27,9 +26,9 @@ const { fonts, colors, fontStyles } = myTheme;
 const Item = styled.div`
   display: flex;
   flex-direction: ${(p) => p.flexDirection || "row"};
-  height: ${(p) => p.itemHeight || "2rem"};
-  max-width: 300px;
-  margin-bottom: 0.5rem;
+  height: ${(p) => p.itemHeight || "3rem"};
+  max-width: 400px;
+ 
 }
 `;
 
@@ -49,11 +48,6 @@ const Input = styled.input`
   outline-style: none;
   border: 0.5px solid ${colors.d1};
   width: ${(p) => p.inputWidth || "13.3rem"};
-  font-size: 1rem;
-  height: 2rem;
-`;
-
-const Message = styled.div`
-  font-size: 1rem;
-  color: ${colors.m2};
+  height: ${(p) => p.inputHeight || "2.2rem"};
+  font-size: 1.2rem;
 `;
