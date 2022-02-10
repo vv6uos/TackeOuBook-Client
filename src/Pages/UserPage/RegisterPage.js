@@ -8,7 +8,6 @@ import { InputWithLabel, Button, Modal } from "components/index";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
 import { chkNull, chkLetter, matchPw } from "./registerValid/index.js";
-import IdChkPop from "./IdChkPop.js";
 
 const { colors, fontStyles } = myTheme;
 
@@ -51,10 +50,6 @@ function RegisterPage() {
       errMessage: "",
     },
   });
-  const [modal, setModal] = useState(false);
-  const onCloseIdChkPOP = () => {
-    setModal(false);
-  };
   const { id, password, chkPassword, name, email, address, phoneNumber } =
     inputs;
   const setInv = (inputs, name, value, $errMessage) => {
@@ -77,6 +72,7 @@ function RegisterPage() {
       },
     });
   };
+
   const onBlur = (e) => {
     const { name } = e.target;
     chkNull(e, inputs, setInv, setValid);
@@ -129,30 +125,11 @@ function RegisterPage() {
     <Wrapper>
       <Form onSubmit={onSubmit} id="form">
         <Title>회원가입</Title>
-        <IdBox>
-          <Input
-            name="id"
-            type="text"
-            onBlur={onBlur}
-            onChange={onChange}
-            inputWidth="16.5rem"
-          >
-            아이디
-          </Input>
-          <ButtonChkID
-            onClick={() => {
-              setModal(true);
-            }}
-          />
-          {modal && (
-            <Modal
-              open={modal}
-              title="아이디 중복확인"
-              close={onCloseIdChkPOP}
-              content={<IdChkPop onClick={onCloseIdChkPOP} />}
-            ></Modal>
-          )}
-        </IdBox>
+
+        <Input name="id" type="text" onBlur={onBlur} onChange={onChange}>
+          아이디
+        </Input>
+
         <Message>{id.errMessage}</Message>
         <Input
           name="password"
@@ -203,8 +180,8 @@ function RegisterPage() {
         <Button
           onClick={onSubmit}
           disabled={onDisabled()}
-          width="19rem"
-          maxWidth="250px"
+          width="25rem"
+          maxWidth="400px"
         >
           가입하기
         </Button>
@@ -259,20 +236,6 @@ function Input({ children, InvalidMessage, $Valid, ...rest }) {
     >
       {children}
     </InputWithLabel>
-  );
-}
-
-function ButtonChkID({ ...props }) {
-  return (
-    <Button
-      margin="0 0.3rem"
-      padding="0.5rem"
-      width="6rem"
-      fontSize="1rem"
-      {...props}
-    >
-      중복확인{" "}
-    </Button>
   );
 }
 

@@ -1,3 +1,5 @@
+import axios from "axios";
+import { API_URL } from "config/constants";
 import { chkNull, matchPw } from "./index";
 
 const empJ = /\s/g;
@@ -20,7 +22,21 @@ function chkLetter(e, inputs, setInv, setValid) {
   switch (name) {
     case "id":
       if (idJ.test(value)) {
-        setValid(inputs, name, value);
+        axios
+          .post(`${API_URL}/users/register/checkUserId`, {
+            user_id: value,
+          })
+          .then((result) => {
+            console.log("REGISTER IDdbChk POST: SUCCESS", result.data);
+            if (result.data) {
+              setValid(inputs, name, value);
+            } else {
+              setInv(inputs, name, value, "사용중인 아이디입니다.");
+            }
+          })
+          .catch((err) => {
+            console.log("REGISTER IDdbChk POST :ERROR");
+          });
       } else {
         setInv(inputs, name, value, "6~15자의 영어 소문자, 숫자 사용해주세요");
       }
