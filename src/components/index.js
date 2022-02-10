@@ -3,3 +3,4 @@ export { default as LogoButton } from "./Button/LogoButton";
 export { default as MenuButton } from "./Button/MenuButton";
 export { default as InputWithLabel } from "./InputWithLabel";
 export { default as MyLink } from "./MyLink";
+export { default as Modal } from "./Modal";

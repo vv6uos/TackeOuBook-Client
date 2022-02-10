@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import axios from "axios";
 
 //-----import 내부 소스
-import { InputWithLabel, Button } from "components/index";
+import { InputWithLabel, Button, Modal } from "components/index";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
 import { chkNull, chkLetter, matchPw } from "./registerValid/index.js";
+import IdChkPop from "./IdChkPop.js";
 
 const { colors, fontStyles } = myTheme;
 
@@ -50,6 +51,10 @@ function RegisterPage() {
       errMessage: "",
     },
   });
+  const [modal, setModal] = useState(false);
+  const onCloseIdChkPOP = () => {
+    setModal(false);
+  };
   const { id, password, chkPassword, name, email, address, phoneNumber } =
     inputs;
   const setInv = (inputs, name, value, $errMessage) => {
@@ -134,7 +139,19 @@ function RegisterPage() {
           >
             아이디
           </Input>
-          <ButtonChkID />
+          <ButtonChkID
+            onClick={() => {
+              setModal(true);
+            }}
+          />
+          {modal && (
+            <Modal
+              open={modal}
+              title="아이디 중복확인"
+              close={onCloseIdChkPOP}
+              content={<IdChkPop onClick={onCloseIdChkPOP} />}
+            ></Modal>
+          )}
         </IdBox>
         <Message>{id.errMessage}</Message>
         <Input
