@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 import { myTheme } from "style";
 const { fonts, colors } = myTheme;
 //Button
-function Button({ children, onClick, ...props }) {
+function Button({ children, ...props }) {
   return (
-    <BasicStyle type="button" onClick={onClick} {...props}>
+    <BasicStyle type="button" {...props}>
       {children}
     </BasicStyle>
   );

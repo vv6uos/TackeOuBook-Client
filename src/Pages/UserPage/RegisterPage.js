@@ -124,77 +124,69 @@ function RegisterPage() {
     <Wrapper>
       <Form onSubmit={onSubmit} id="form">
         <Title>회원가입</Title>
-        <Input
-          name="id"
-          type="text"
-          InvalidMessage={id.errMessage}
-          onBlur={onBlur}
-          onChange={onChange}
-        >
-          아이디
-        </Input>
-
+        <IdBox>
+          <Input
+            name="id"
+            type="text"
+            onBlur={onBlur}
+            onChange={onChange}
+            inputWidth="16.5rem"
+          >
+            아이디
+          </Input>
+          <ButtonChkID />
+        </IdBox>
+        <Message>{id.errMessage}</Message>
         <Input
           name="password"
           type="password"
-          InvalidMessage={password.errMessage}
           onBlur={onBlur}
           onChange={onChange}
         >
           비밀번호
         </Input>
+        <Message>{password.errMessage}</Message>
         <Input
           name="chkPassword"
           type="password"
-          InvalidMessage={chkPassword.errMessage}
           onBlur={onBlur}
           onChange={onChange}
         >
           비밀번호 확인
         </Input>
-        <Input
-          name="name"
-          type="text"
-          InvalidMessage={name.errMessage}
-          onBlur={onBlur}
-          onChange={onChange}
-        >
+        <Message>{chkPassword.errMessage}</Message>
+        <Input name="name" type="text" onBlur={onBlur} onChange={onChange}>
           이름
         </Input>
+        <Message>{name.errMessage}</Message>
         <Input
           type="email"
           name="email"
-          InvalidMessage={email.errMessage}
           onChange={onChange}
           onBlur={onBlur}
           placeholder="예) book@book.cr"
         >
           이메일(선택)
         </Input>
-        <Input
-          type="text"
-          name="address"
-          InvalidMessage={address.errMessage}
-          onChange={onChange}
-          onBlur={onBlur}
-        >
+        <Message>{email.errMessage}</Message>
+        <Input type="text" name="address" onChange={onChange} onBlur={onBlur}>
           주소(선택)
         </Input>
+        <Message>{address.errMessage}</Message>
         <Input
           type="tel"
           name="phoneNumber"
-          InvalidMessage={phoneNumber.errMessage}
           onChange={onChange}
           onBlur={onBlur}
           placeholder="'-'하이픈없이 숫자만 예) 01029493424"
         >
           연락처(선택)
         </Input>
+        <Message>{phoneNumber.errMessage}</Message>
         <Button
-          type="button"
           onClick={onSubmit}
           disabled={onDisabled()}
-          width="20rem"
+          width="19rem"
           maxWidth="250px"
         >
           가입하기
@@ -226,7 +218,15 @@ const Form = styled.form`
 
 const Title = styled.div`
   ${fontStyles.semiTitle}
-  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid ${colors.m1};
+`;
+const IdBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 
 function Input({ children, InvalidMessage, $Valid, ...rest }) {
@@ -234,8 +234,8 @@ function Input({ children, InvalidMessage, $Valid, ...rest }) {
     <InputWithLabel
       labelWidth="10rem"
       flexDirection="column"
-      itemHeight="5.5rem"
-      inputWidth="20rem"
+      itemHeight="4.2rem"
+      inputWidth="24rem"
       $Valid={$Valid}
       InvalidMessage={InvalidMessage}
       {...rest}
@@ -244,3 +244,24 @@ function Input({ children, InvalidMessage, $Valid, ...rest }) {
     </InputWithLabel>
   );
 }
+
+function ButtonChkID({ ...props }) {
+  return (
+    <Button
+      margin="0 0.3rem"
+      padding="0.5rem"
+      width="6rem"
+      fontSize="1rem"
+      {...props}
+    >
+      중복확인{" "}
+    </Button>
+  );
+}
+
+const Message = styled.div`
+  width: 24rem;
+  color: ${colors.m2};
+  margin-bottom: 1rem;
+  height: 1rem;
+`;
