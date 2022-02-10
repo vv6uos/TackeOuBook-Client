@@ -2,7 +2,8 @@ import { css } from "styled-components";
 
 const colors = {
   //main colors
-  bg: "#FFFAEF",
+  bg: "#FFF",
+  gray: "#f1f1f1",
   m1: "#1C5E75",
   m2: "#903909",
   l1: "#FFFAEF",
