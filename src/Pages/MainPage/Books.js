@@ -62,9 +62,9 @@ const Wrapper = styled.div`
   ${myCSS.flexColumn}
 `;
 const Title = styled.h1`
-  border: 3px solid ${colors.l2};
-  background-color: ${colors.l1};
-  border-radius: 5% 5%;
+  border: 3px solid ${colors.gray};
+  background-color: ${colors.gray};
+  border-radius: 5%;
   padding-top: 2rem;
   padding-bottom: 2rem;
   text-align: center;
