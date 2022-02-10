@@ -16,37 +16,37 @@ function RegisterPage() {
   const [inputs, setInputs] = useState({
     id: {
       value: "",
-      valid: "",
+      valid: false,
       errMessage: "",
     },
     password: {
       value: "",
-      valid: "",
+      valid: false,
       errMessage: "",
     },
     chkPassword: {
       value: "",
-      valid: "",
+      valid: false,
       errMessage: "",
     },
     name: {
       value: "",
-      valid: "",
+      valid: false,
       errMessage: "",
     },
     email: {
       value: "",
-      valid: "valid",
+      valid: true,
       errMessage: "",
     },
     address: {
       value: "",
-      valid: "valid",
+      valid: true,
       errMessage: "",
     },
     phoneNumber: {
       value: "",
-      valid: "valid",
+      valid: true,
       errMessage: "",
     },
   });
@@ -57,7 +57,7 @@ function RegisterPage() {
       ...inputs,
       [name]: {
         value,
-        valid: "invalid",
+        valid: false,
         errMessage: $errMessage,
       },
     });
@@ -67,7 +67,7 @@ function RegisterPage() {
       ...inputs,
       [name]: {
         value,
-        valid: "valid",
+        valid: true,
         errMessage: "",
       },
     });
@@ -87,13 +87,13 @@ function RegisterPage() {
   const onDisabled = () => {
     let result = true;
     if (
-      id.valid === "valid" &&
-      password.valid === "valid" &&
-      chkPassword.valid === "valid" &&
-      name.valid === "valid" &&
-      email.valid === "valid" &&
-      address.valid === "valid" &&
-      phoneNumber.valid === "valid"
+      id.valid &&
+      password.valid &&
+      chkPassword.valid &&
+      name.valid &&
+      email.valid &&
+      address.valid &&
+      phoneNumber.valid
     ) {
       result = false;
     }
