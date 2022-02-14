@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 //-----import 내부 소스
-import { InputWithLabel, Button, Modal } from "components/index";
+import { InputWithLabel, Button } from "components/index";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
-import { chkNull, chkLetter, matchPw } from "./registerValid/index.js";
+import { chkNull, chkLetter } from "./registerValid/index.js";
 
 const { colors, fontStyles } = myTheme;
 
@@ -103,7 +103,6 @@ function RegisterPage() {
   const onSubmit = (e) => {
     console.log("제출중....", inputs);
 
-    e.preventDefault();
     axios
       .post(`${API_URL}/users/register`, {
         user_id: id.value,
@@ -114,10 +113,19 @@ function RegisterPage() {
         phoneNumber: phoneNumber.value,
       })
       .then((result) => {
-        console.log("REGISTER AXIOS POST :SUCCESS");
+        console.log("REGISTER AXIOS POST : SUCCESS");
+        if (!result.data.result) {
+          console.log(result.data.err);
+          alert("회원가입에 실패했습니다.");
+          window.location.reload();
+        } else {
+          alert("회원가입을 축하드립니다.");
+          window.location.replace("/login");
+        }
       })
       .catch((err) => {
-        console.log("REGISTER AXIOS POST :ERROR");
+        console.log("REGISTER AXIOS POST : ERROR");
+        alert("다시 시도 부탁드립니다.");
       });
   };
 
