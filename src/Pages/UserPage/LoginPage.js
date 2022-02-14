@@ -34,10 +34,17 @@ function LoginPage() {
           password: inputs.password,
         })
         .then((result) => {
-          alert("로그인 성공");
+          console.log("AXiOS LOGIN POST : SUCCESS");
+          if (result.data) {
+            console.log(result);
+            // 로그인세션으로 넘어가고 페이지가 리로드된다
+          } else {
+            alert("로그인의 실패했습니다. 잠시후 다시 시도 부탁드립니다.");
+            window.location.reload();
+          }
         })
         .catch((err) => {
-          alert("로그인 실패!");
+          console.log("AXiOS LOGIN POST : ERR");
         });
     } else alert("아이디와 비밀번호를 확인부탁드립니다.");
   };
