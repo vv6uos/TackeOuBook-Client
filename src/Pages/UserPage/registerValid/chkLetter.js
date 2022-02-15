@@ -23,7 +23,7 @@ function chkLetter(e, inputs, setInv, setValid) {
     case "id":
       if (idJ.test(value)) {
         axios
-          .post(`${API_URL}/users/register/checkUserId`, {
+          .post(`${API_URL}/register/checkId`, {
             user_id: value,
           })
           .then((result) => {

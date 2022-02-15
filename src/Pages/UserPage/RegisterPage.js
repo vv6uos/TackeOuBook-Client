@@ -104,7 +104,7 @@ function RegisterPage() {
     console.log("제출중....", inputs);
 
     axios
-      .post(`${API_URL}/users/register`, {
+      .post(`${API_URL}/register`, {
         user_id: id.value,
         password: password.value,
         user_name: name.value,

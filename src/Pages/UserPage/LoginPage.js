@@ -26,25 +26,29 @@ function LoginPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
     if (inputs.id.length > 4 && inputs.password.length >= 4) {
       axios
-        .post(`${API_URL}/users/login`, {
-          user_id: inputs.id,
-          password: inputs.password,
-        })
+        .post(
+          `${API_URL}/login`,
+          {
+            user_id: inputs.id,
+            password: inputs.password,
+          },
+          { withCredentials: true }
+        )
         .then((result) => {
           console.log("AXiOS LOGIN POST : SUCCESS");
-          if (result.data) {
-            console.log(result);
-            // 로그인세션으로 넘어가고 페이지가 리로드된다
+          if (result.data.isLogin) {
+            console.log(result.data);
+            alert(`${result.data.User.user_name}님, 안녕하세요`);
+            window.location.replace("/");
           } else {
-            alert("로그인의 실패했습니다. 잠시후 다시 시도 부탁드립니다.");
-            window.location.reload();
+            alert("아이디와 비밀번호를 확인부탁드립니다");
           }
         })
         .catch((err) => {
           console.log("AXiOS LOGIN POST : ERR");
+          alert("잠시 후 시도해주세요");
         });
     } else alert("아이디와 비밀번호를 확인부탁드립니다.");
   };
