@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonDisabledTestArea from "./ButtonTest";
 import DoubleCheck from "./DoubleCheck";
+import SessionTest from "./SessionTest";
 
 function TestPage() {
   return (
     <>
+      <SessionTest />
       {inputAB()}
       <ButtonDisabledTestArea />
       <DoubleCheck />
