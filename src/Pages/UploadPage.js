@@ -1,9 +1,9 @@
-import Button from "../components/styled/Button";
-import CenterPositioner from "../components/styled/CenterPositioner";
-import Input from "../components/styled/Input";
+import Button from "../components/Button";
+import Input from "../components/InputWithLabel";
+
 function UploadPage() {
   return (
-    <CenterPositioner>
+    <>
       <h1>판매도서등록</h1>
       <form>
         <Input placeholder="사진파일" type="file" required>
@@ -27,7 +27,7 @@ function UploadPage() {
         <Button>완료</Button>
         {/*submit 만들기*/}
       </form>
-    </CenterPositioner>
+    </>
   );
 }
 
