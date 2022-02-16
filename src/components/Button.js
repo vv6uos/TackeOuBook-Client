@@ -23,23 +23,29 @@ const defaultStyle = css`
   cursor: pointer;
 
   border: none;
-
+  &:hover {
+    opacity: 0.8;
+  }
   :disabled {
-    background-color: ${colors.m1};
-    opacity: 0.7;
+    background-color: gray;
+    opacity: 0.5;
   }
 `;
 
 const BasicStyle = styled.button`
   ${defaultStyle};
+  & + & {
+    border-left: ${(props) => props.bdLeft || ""};
+  }
+
   margin: ${(props) => props.margin || "0.4rem"};
   padding: ${(props) => props.padding || "0.8rem"};
   width: ${(props) => props.width || "6rem"};
-  height: ${(props) => props.height || "1.2rem"};
+  height: ${(props) => props.height || "1.5rem"};
   max-width: ${(props) => props.maxWidth || "120px"};
   min-width: ${(props) => props.minWidth || "45px"};
   font-family: ${(props) => props.fontFam || fonts.s};
-  font-size: ${(props) => props.fontSize || "1rem"};
+  font-size: ${(props) => props.fontSize || "1.2rem"};
 
   background-color: ${(props) => props.bgColor || colors.m1};
   color: ${(props) => props.color || colors.bg};
