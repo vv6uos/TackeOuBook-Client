@@ -1,6 +1,9 @@
 //-----import 외부 소스
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL } from "config/constants";
 
 //-----import 내부
 import {
@@ -17,11 +20,34 @@ import { myCSS, myTheme, GlobalStyle } from "style/index";
 const { colors } = myTheme;
 
 function App() {
+  const [isMember, setIsMember] = useState({
+    logged: false,
+    id: "",
+    name: "익명",
+  });
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/loginCheck`, { withCredentials: true })
+      .then((result) => {
+        if (result.data.loggedIn) {
+          setIsMember({
+            logged: result.data.loggedIn,
+            id: result.data.loginData.user_id,
+            name: result.data.loginData.user_name,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("axios실패");
+      });
+  }, []);
+  console.log(isMember.name, "의 사용자가 사용중...");
+
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <Header />
+        <Header isMember={isMember} />
         <Body>
           <Routes>
             <Route path={"/"} element={<MainPage />} />
