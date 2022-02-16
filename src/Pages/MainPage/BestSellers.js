@@ -20,11 +20,13 @@ function BestSellers() {
 
   return (
     <Wrapper>
+      <AladinLogo src="https://image.aladin.co.kr/img/blog2/main/aladdin_logo.gif" />
+      //https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbwanamzz1755003&QueryType=ItemNewAll&MaxResults=10&start=1&SearchTarget=Book&output=xml&Version=20131101
       <Title>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </Title>
       <Container alt="베스트셀러">
         {bestsellers.map((bestseller) => {
           return (
-            <Card>
+            <Card key={bestseller.id}>
               <BookImg src={`${bestseller.imgURL}`} alt="베스트셀러 사진" />
               <BookInfoBox>
                 <p>{bestseller.id}</p>
@@ -81,4 +83,9 @@ const BookImg = styled.img`
 
 const BookInfoBox = styled.div`
   padding: 0 2vmin;
+`;
+
+const AladinLogo = styled.img`
+  width: 10rem;
+  height: 3rem;
 `;
