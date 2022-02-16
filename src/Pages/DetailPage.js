@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 //-----내부 소스
-import Button from "components/Button/Button";
+import Button from "components/Button";
 import { API_URL } from "config/constants";
 import { myCSS, myTheme } from "style";
 
