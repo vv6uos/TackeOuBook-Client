@@ -1,19 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import Theme from "../../style/theme";
-import Button from "./Button";
+import Button from "../../components/Button";
 
-function MenuButton({ children, moveTo }) {
+function MenuButton({ children, moveTo, onClick }) {
   const navigate = useNavigate();
   const page = moveTo;
+
   const goServicePg = () => {
     navigate(page);
   };
 
-  return (
-    <Button onClick={goServicePg} bgColor={colors.m1}>
-      {children}
-    </Button>
-  );
+  return <Button onClick={onClick || goServicePg}>{children}</Button>;
 }
 const { fonts, colors } = Theme;
 

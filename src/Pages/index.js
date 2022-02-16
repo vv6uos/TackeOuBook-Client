@@ -1,4 +1,4 @@
-export { default as Header } from "./Header";
+export { default as Header } from "./Header/Header";
 export { default as MainPage } from "./MainPage/MainPage";
 export { default as LoginPage } from "./UserPage/LoginPage";
 export { default as RegisterPage } from "./UserPage/RegisterPage";
