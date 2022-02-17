@@ -5,4 +5,4 @@ export { default as RegisterPage } from "./UserPage/RegisterPage";
 export { default as DetailPage } from "./DetailPage";
 export { default as UploadPage } from "./UploadPage";
 export { default as TestPage } from "./TestPage/TestPage";
-export { default as MyPage } from "./MyPage";
+export { default as MyPage } from "./Mypage/Mypage";
