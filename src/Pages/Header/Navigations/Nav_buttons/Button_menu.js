@@ -1,6 +1,5 @@
+import { Button } from "components";
 import { useNavigate } from "react-router-dom";
-import Theme from "../../style/theme";
-import Button from "../../components/Button";
 
 function MenuButton({ children, moveTo, onClick }) {
   const navigate = useNavigate();
@@ -12,6 +11,5 @@ function MenuButton({ children, moveTo, onClick }) {
 
   return <Button onClick={onClick || goServicePg}>{children}</Button>;
 }
-const { fonts, colors } = Theme;
 
 export default MenuButton;
