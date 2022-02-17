@@ -4,6 +4,7 @@ const colors = {
   //main colors
   bg: "#FFF",
   gray: "#f1f1f1",
+  pink: "#FFB3B3",
   m1: "#1C5E75",
   m2: "#903909",
   l1: "#FFFAEF",
@@ -38,6 +39,10 @@ const fontStyles = {
     font-family: ${fonts.d1};
     color: gray;
     font-size: 0.6rem;
+  `,
+  smbold: css`
+    font-family: ${fonts.s};
+    font-weight: bold;
   `,
 };
 
