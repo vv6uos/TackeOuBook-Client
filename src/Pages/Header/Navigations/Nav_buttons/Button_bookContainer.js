@@ -12,5 +12,5 @@ function BookContainer() {
 export default BookContainer;
 
 const Img = styled.img`
-  height: 100%;
+  height: 3rem;
 `;

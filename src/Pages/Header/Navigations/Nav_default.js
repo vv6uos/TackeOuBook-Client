@@ -28,4 +28,8 @@ const Nav = styled.div`
   border-bottom: 1px solid ${colors.gray};
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+  }
 `;

@@ -26,9 +26,9 @@ function NavButton({ children, moveTo, onClick, width, color, ...props }) {
       bgColor={`${colors.bg}`}
       bdLeft={`2px solid ${colors.d1}`}
       height="1.2rem"
-      width={$width || "7rem"}
+      width={$width || "6rem"}
       padding="0"
-      margin="0.3rem 0"
+      margin="0 0.5rem 0 0"
       {...props}
     >
       {children}
