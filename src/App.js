@@ -14,6 +14,7 @@ import {
   UploadPage,
   TestPage,
   Header,
+  MyPage,
 } from "Pages/index";
 import { myCSS, myTheme, GlobalStyle } from "style/index";
 
@@ -56,6 +57,7 @@ function App() {
             <Route path={"/test"} element={<TestPage />} />
             <Route path={"/login"} element={<LoginPage />} />
             <Route path={"/register"} element={<RegisterPage />} />
+            <Route path={"/mypage"} element={<MyPage />} />
           </Routes>
         </Body>
         <Footer>@s6uos ALL RIGHTS RESERVED</Footer>
