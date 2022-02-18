@@ -1,13 +1,27 @@
 import styled from "styled-components";
 
-import { Logo } from "components";
+import { Logo, Modal, SubscribePop } from "components";
 import { myTheme } from "style";
 import { MemberNav, DefaultNav } from "./Navigations/index";
 import { MenuButton } from "./Navigations/Nav_buttons/index";
+import { useState } from "react";
 
 function Header({ isMember }) {
+  const [pop, setPop] = useState(false);
+  const onClosePop = () => {
+    setPop(false);
+  };
+
   return (
     <HeaderBox>
+      {pop && (
+        <Modal
+          title="구독"
+          open={pop}
+          close={onClosePop}
+          content={<SubscribePop close={onClosePop} />}
+        />
+      )}
       <MenuBox>
         <MenuButton moveTo="/upload">업로드</MenuButton>
         <MenuButton moveTo="/test">테스트</MenuButton>
@@ -17,7 +31,11 @@ function Header({ isMember }) {
         <Logo />
       </LogoContainer>
 
-      {isMember.logged ? <MemberNav isMember={isMember} /> : <DefaultNav />}
+      {isMember.logged ? (
+        <MemberNav setPop={setPop} isMember={isMember} />
+      ) : (
+        <DefaultNav setPop={setPop} />
+      )}
     </HeaderBox>
   );
 }

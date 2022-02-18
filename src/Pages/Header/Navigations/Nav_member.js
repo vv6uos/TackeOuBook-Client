@@ -1,6 +1,7 @@
 //외부 import
 import axios from "axios";
 import styled from "styled-components";
+import React, { useState } from "react";
 
 //내부 import
 import { myTheme } from "style";
@@ -8,7 +9,7 @@ import { API_URL } from "config/constants";
 import { NavButton, SubscribeButton, BookContainer } from "./Nav_buttons/index";
 
 //메인
-function MemberNav({ isMember }) {
+function MemberNav({ isMember, setPop }) {
   const onLogout = () => {
     AxiosToLogout();
   };
@@ -19,7 +20,7 @@ function MemberNav({ isMember }) {
         <BookContainer />
         <User>{`${isMember.name}님`}</User>
 
-        <SubscribeButton />
+        <SubscribeButton onClick={() => setPop(true)} />
       </LeftContainer>
       <RightContainer>
         <NavButton moveTo="/mypage">마이페이지</NavButton>

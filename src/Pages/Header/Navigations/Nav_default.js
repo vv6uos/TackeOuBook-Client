@@ -1,22 +1,28 @@
 import styled from "styled-components";
+import React, { useState } from "react";
 
 //내부 import
 import { myTheme } from "style";
 import { BookContainer, NavButton, SubscribeButton } from "./Nav_buttons/index";
 
 //메인
-function DefaultNav() {
+function DefaultNav({ setPop }) {
   return (
     <Nav>
       <BookContainer />
       <NavButton moveTo="/login">로그인</NavButton>
       <NavButton moveTo="/register">회원가입</NavButton>
-      <SubscribeButton />
+      <SubscribeButton
+        onClick={() => {
+          setPop(true);
+        }}
+      />
     </Nav>
   );
 }
 
 export default DefaultNav;
+//함수
 
 //스타일
 const { colors } = myTheme;
