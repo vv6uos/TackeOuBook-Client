@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { myTheme } from "style";
-const { fonts, colors } = myTheme;
+const { colors } = myTheme;
 
 function Modal(props) {
   const { open, close, title, content } = props;

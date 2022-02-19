@@ -225,11 +225,6 @@ const Title = styled.div`
   margin-bottom: 3rem;
   border-bottom: 1px solid ${colors.m1};
 `;
-const IdBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
 
 function Input({ children, InvalidMessage, $Valid, ...rest }) {
   return (

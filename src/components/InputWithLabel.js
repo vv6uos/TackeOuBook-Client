@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 //내부
 import { myTheme } from "style/index";
@@ -21,7 +21,7 @@ export default function InputWithLabel({
   );
 }
 
-const { fonts, colors, fontStyles } = myTheme;
+const { fonts, colors } = myTheme;
 
 const Item = styled.div`
   display: flex;

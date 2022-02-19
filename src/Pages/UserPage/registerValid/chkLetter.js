@@ -2,7 +2,6 @@ import axios from "axios";
 import { API_URL } from "config/constants";
 import { chkNull, matchPw } from "./index";
 
-const empJ = /\s/g;
 //아이디 정규식
 const idJ = /^[a-z0-9]{6,15}$/;
 // 비밀번호 정규식
@@ -14,8 +13,6 @@ const mailJ =
 const phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 // 이름 정규식
 const nameJ = /^[가-힣0-9]{2,30}$/;
-const defaultJ = /^[가-힣0-9]{2,30}$/;
-const testJ = /^[ㄱ-ㅎㅏ-ㅣ가-힣0-9!?()]{2,5}$/;
 
 function chkLetter(e, inputs, setInv, setValid) {
   const { name, value } = e.target;
