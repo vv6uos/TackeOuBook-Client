@@ -1,8 +1,7 @@
 //외부 import
 import axios from "axios";
 import styled from "styled-components";
-import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 //내부 import
 import { myTheme } from "style";
 import { API_URL } from "config/constants";
@@ -10,8 +9,17 @@ import { NavButton, SubscribeButton, BookContainer } from "./Nav_buttons/index";
 
 //메인
 function MemberNav({ isMember, setPop }) {
+  const navigate = useNavigate();
   const onLogout = () => {
     AxiosToLogout();
+  };
+  const onClickSubscribeBtn = () => {
+    if (!isMember.subscribe) {
+      setPop(true);
+    } else {
+      setPop(false);
+      navigate("/mypage/mysubscribe");
+    }
   };
 
   return (
@@ -20,7 +28,7 @@ function MemberNav({ isMember, setPop }) {
         <BookContainer />
         <User>{`${isMember.name}님`}</User>
 
-        <SubscribeButton onClick={() => setPop(true)} />
+        <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
       <RightContainer>
         <NavButton moveTo="/mypage">마이페이지</NavButton>
@@ -36,11 +44,11 @@ export default MemberNav;
 
 const AxiosToLogout = () => {
   axios
-    .get(`${API_URL}/logout`, { withCredentials: true })
+    .get(`${API_URL}/userSession/delete`, { withCredentials: true })
     .then((result) => {
       console.log("AXIOS LOGOUT: SUCCESS");
       console.log("로그아웃....", result.data);
-      window.location.replace("/");
+      window.location.reload(true);
     })
     .catch((err) => {
       console.log("AXIOS LOGOUT: ERROR");

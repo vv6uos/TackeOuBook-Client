@@ -57,7 +57,10 @@ function App() {
             <Route path={"/test"} element={<TestPage />} />
             <Route path={"/login"} element={<LoginPage />} />
             <Route path={"/register"} element={<RegisterPage />} />
-            <Route path={"/mypage/*"} element={<MyPage />} />
+            <Route
+              path={"/mypage/*"}
+              element={<MyPage isMember={isMember} />}
+            />
           </Routes>
         </Body>
         <Footer>@s6uos ALL RIGHTS RESERVED</Footer>

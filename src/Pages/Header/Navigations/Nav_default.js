@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React, { useState } from "react";
 
 //내부 import
 import { myTheme } from "style";

@@ -19,7 +19,7 @@ function Header({ isMember }) {
           title="구독"
           open={pop}
           close={onClosePop}
-          content={<SubscribePop close={onClosePop} />}
+          content={<SubscribePop close={onClosePop} isMember={isMember} />}
         />
       )}
       <MenuBox>
@@ -31,7 +31,7 @@ function Header({ isMember }) {
         <Logo />
       </LogoContainer>
 
-      {isMember.logged ? (
+      {isMember.login ? (
         <MemberNav setPop={setPop} isMember={isMember} />
       ) : (
         <DefaultNav setPop={setPop} />
@@ -56,13 +56,4 @@ const LogoContainer = styled.div`
 
 const MenuBox = styled.div`
   display: flex;
-`;
-
-const Nav = styled.div`
-  height: 4rem;
-  padding: 1rem;
-  background-color: white;
-  border-bottom: 1px solid ${colors.gray};
-  display: flex;
-  justify-content: flex-end;
 `;
