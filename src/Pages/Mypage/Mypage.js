@@ -10,7 +10,7 @@ import { MyLink } from "components";
 import { myCSS, myTheme } from "style/index";
 import { MySubscribe, MyInfos, MyRental } from "./components/index";
 
-function MyPage() {
+function MyPage({ isMember }) {
   return (
     <Wrapper>
       <Nav>
@@ -22,8 +22,11 @@ function MyPage() {
       <Container>
         <Routes>
           <Route path={"/myinfo"} element={<MyInfos />} />
-          <Route path={"/subscribe"} element={<MySubscribe />} />
-          <Route path={"/rental"} element={<MyRental />} />
+          <Route
+            path={"/mysubscribe"}
+            element={<MySubscribe isMember={isMember} />}
+          />
+          <Route path={"/myrental"} element={<MyRental />} />
         </Routes>
       </Container>
     </Wrapper>
@@ -73,4 +76,8 @@ const NavTitle = styled.div`
   font-size: 1.4rem;
   margin: 0 1rem 1rem 0;
 `;
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+
+  background-color: ${colors.gray};
+`;
