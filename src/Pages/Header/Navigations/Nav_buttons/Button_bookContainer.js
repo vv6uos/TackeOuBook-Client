@@ -4,7 +4,7 @@ import { MyLink } from "components";
 function BookContainer() {
   return (
     <MyLink to="/mypage">
-      <Img src="images\bookcontainer.jpg" />
+      <Img src="https://i.imgur.com/YILs4kW.jpg" />
     </MyLink>
   );
 }

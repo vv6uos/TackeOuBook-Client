@@ -3,7 +3,7 @@ import MyLink from "./MyLink";
 function Logo() {
   return (
     <MyLink to="/">
-      <LogoImg alt="로고" src="images\Logo_full.png" />
+      <LogoImg alt="로고" src="https://i.imgur.com/xxx7jH6.png" />
     </MyLink>
   );
 }
