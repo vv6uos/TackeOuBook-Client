@@ -2,32 +2,14 @@ import styled from "styled-components";
 
 import { Button } from "components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_URL } from "config/constants";
+import onChangeSubscribe from "./onChangeSubscribe";
 
 function SubscribePop(props) {
   const { close, isMember } = props;
   const navigate = useNavigate();
   const onSubscribe = () => {
-    if (isMember.logged) {
-      axios
-        .post(
-          `${API_URL}/member/subscribe`,
-          {
-            user_id: isMember.id,
-            subscribe: true,
-          },
-          { withCredentials: true }
-        )
-        .then((result) => {
-          console.debug("구독정보 변경 성공", result.data);
-          close();
-          alert("구독해주셔서 감사합니다");
-          window.location("/");
-        })
-        .catch((err) => {
-          alert("잠시후에 시도 부탁드립니다", err);
-        });
+    if (isMember.login) {
+      onChangeSubscribe(isMember.id, true);
     } else {
       alert("로그인을 먼저 해주세요!");
       close();
