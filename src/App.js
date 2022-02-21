@@ -22,27 +22,27 @@ const { colors } = myTheme;
 
 function App() {
   const [isMember, setIsMember] = useState({
-    logged: false,
+    login: false,
     id: "",
     name: "익명",
+    subscribe: false,
   });
   useEffect(() => {
     axios
-      .get(`${API_URL}/loginCheck`, { withCredentials: true })
+      .get(`${API_URL}/userSession`, { withCredentials: true })
       .then((result) => {
-        if (result.data.loggedIn) {
-          setIsMember({
-            logged: result.data.loggedIn,
-            id: result.data.loginData.user_id,
-            name: result.data.loginData.user_name,
-          });
-        }
+        const user = result.data.user;
+        setIsMember({
+          login: user.isLogin,
+          id: user.id,
+          name: user.name,
+          subscribe: user.subscribe,
+        });
       })
       .catch((err) => {
-        console.log("axios실패");
+        console.log("/userSession , Axios ERROR");
       });
   }, []);
-  console.log(isMember.name, "의 사용자가 사용중...");
 
   return (
     <>

@@ -26,31 +26,31 @@ function LoginPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (inputs.id.length > 4 && inputs.password.length >= 4) {
-      axios
-        .post(
-          `${API_URL}/login`,
-          {
-            user_id: inputs.id,
-            password: inputs.password,
-          },
-          { withCredentials: true }
-        )
-        .then((result) => {
-          console.log("AXiOS LOGIN POST : SUCCESS");
-          if (result.data.isLogin) {
-            console.log(result.data);
-            alert(`${result.data.User.user_name}님, 안녕하세요`);
-            window.location.replace("/");
-          } else {
-            alert("아이디와 비밀번호를 확인부탁드립니다");
-          }
-        })
-        .catch((err) => {
-          console.log("AXiOS LOGIN POST : ERR");
-          alert("잠시 후 시도해주세요");
-        });
-    } else alert("아이디와 비밀번호를 확인부탁드립니다.");
+    axios
+      .post(
+        `${API_URL}/userSession/create`,
+        {
+          user_id: inputs.id,
+          password: inputs.password,
+        },
+        { withCredentials: true }
+      )
+      .then((result) => {
+        console.log("AXiOS LOGIN POST :");
+        const user = result.data.user;
+        if (user.isLogin) {
+          console.log("LOGIN RESULT", user);
+          alert(`${user.name}님, 안녕하세요`);
+          window.location.replace("/");
+        } else {
+          console.log("LOGIN RESULT ERROR");
+          alert("아이디와 비밀번호를 확인부탁드립니다");
+        }
+      })
+      .catch((err) => {
+        console.log("AXiOS LOGIN POST : ERR");
+        alert("[/createSession server ERROR]=> 관리자에게 문의 부탁드립니다");
+      });
   };
   return (
     <Wrapper>
