@@ -27,11 +27,10 @@ function MemberNav({ isMember, setPop }) {
       <LeftContainer>
         <BookContainer />
         <User>{`${isMember.name}님`}</User>
-
         <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
       <RightContainer>
-        <NavButton moveTo="/mypage">마이페이지</NavButton>
+        <NavButton moveTo="/mypage/mysubscribe">마이페이지</NavButton>
         <NavButton onClick={onLogout}>로그아웃</NavButton>
       </RightContainer>
     </Nav>
