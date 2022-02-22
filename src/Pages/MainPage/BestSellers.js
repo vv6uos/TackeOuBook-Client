@@ -5,10 +5,7 @@ import { React, useState, useEffect } from "react";
 
 //-----내부
 import { API_URL } from "config/constants";
-import Theme from "style/theme";
-import myCSS from "style/favoriteCss";
-
-const { fontStyles } = Theme;
+import { myCSS, myTheme } from "style/index";
 
 //-----메인 함수
 
@@ -20,17 +17,23 @@ function BestSellers() {
 
   return (
     <Wrapper>
-      <AladinLogo src="https://image.aladin.co.kr/img/blog2/main/aladdin_logo.gif" />
-      //https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbwanamzz1755003&QueryType=ItemNewAll&MaxResults=10&start=1&SearchTarget=Book&output=xml&Version=20131101
-      <Title>추천도서 (출처 : 알라딘 베스트셀러 추천도서 API) </Title>
+      <Title>
+        <AladinLogo src="https://image.aladin.co.kr/img/blog2/main/aladdin_logo.gif" />
+        베스트셀러{" "}
+      </Title>
       <Container alt="베스트셀러">
         {bestsellers.map((bestseller) => {
           return (
-            <Card key={bestseller.id}>
-              <BookImg src={`${bestseller.imgURL}`} alt="베스트셀러 사진" />
+            <Card
+              key={bestseller.itemId}
+              onClick={() => {
+                window.open(`${bestseller.link}`);
+              }}
+            >
+              <BookImg src={`${bestseller.cover}`} alt="베스트셀러 사진" />
               <BookInfoBox>
-                <p>{bestseller.id}</p>
-                <p>{bestseller.name}</p>
+                <div>{bestseller.bestRank}</div>
+                <div>{bestseller.title}</div>
               </BookInfoBox>
             </Card>
           );
@@ -52,15 +55,27 @@ function AxiosBestsellers({ setBestsellers }) {
       setBestsellers(bestsellers);
     })
     .catch((err) => {
-      console.log("실패 :", err);
+      console.log("실패 :", err.response);
     });
 }
 
 //-----스타일
+
+const { fontStyles, colors } = myTheme;
+
 const Wrapper = styled.div`
   ${myCSS.flexColumn}
+  border:1px solid ${colors.gray};
+  min-width: 768px;
 `;
+const AladinLogo = styled.img`
+  width: 8rem;
+  height: 2.2rem;
+  margin: 0 0.5em;
+`;
+
 const Title = styled.div`
+  margin-top: 2rem;
   ${fontStyles.semiTitle}
 `;
 const Container = styled.div`
@@ -69,23 +84,21 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  margin: 1.5rem auto;
+  margin: 1.5rem;
   width: 100%;
   max-width: 250px;
   ${fontStyles.body};
 `;
 const BookImg = styled.img`
+  border: 3px solid ${colors.gray};
   display: block;
   margin: 0 auto;
-  height: 24vmin;
+  height: 12rem;
+  min-height: 100px;
   max-height: 270px;
 `;
 
 const BookInfoBox = styled.div`
-  padding: 0 2vmin;
-`;
-
-const AladinLogo = styled.img`
-  width: 10rem;
-  height: 3rem;
+  border-top: 3px solid ${colors.gray};
+  padding: 1rem;
 `;
