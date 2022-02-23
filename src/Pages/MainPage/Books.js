@@ -23,13 +23,15 @@ function Books() {
           return (
             <Card key={book.id}>
               <MyLink to={`/books/${book.id}`}>
-                <BookImg src={`${book.imgURL}`} alt="도서사진" />
-                <BookInfoBox>
-                  <p>{book.id}</p>
-                  <p>도 서 명: {book.name}</p>
-                  <p>대여가격: {book.price.toLocaleString()}원</p>
-                  <p>저 자: {book.seller}</p>
-                </BookInfoBox>
+                <img
+                  className="bookCover"
+                  src={`${book.imgURL}`}
+                  alt="도서사진]"
+                />
+                <InfoBox>
+                  <div className="author">| {book.author}</div>
+                  <div>{book.name}</div>
+                </InfoBox>
               </MyLink>
             </Card>
           );
@@ -60,40 +62,39 @@ const { fontStyles, colors } = myTheme;
 
 const Wrapper = styled.div`
   ${myCSS.flexColumn}
+  border-top:6px double ${colors.m1};
+  margin-top: 3rem;
 `;
-const Title = styled.h1`
-  border: 3px solid ${colors.gray};
-  background-color: ${colors.gray};
-  border-radius: 5%;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+const Title = styled.div`
+  margin: 3rem 0;
   text-align: center;
-  ${fontStyles.mainTitle}
+  ${fontStyles.semiTitle}
+  font-size:2rem;
 `;
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  align-content: flex-start;
 `;
 
 const Card = styled.div`
-  margin: 2vh 1.2vw 2vh 0vw;
-  flex-basis: 20rem;
-  padding: 2vh 1vw;
-  border: 1px solid ${colors.d1};
-  border-radius: 5% 5%;
-
+  margin: 1rem 0.5rem;
+  flex-basis: 23.5%;
   ${fontStyles.body};
+  .bookCover {
+    display: block;
+    margin: 5% auto;
+    height: 15.46rem;
+    border: 3px solid ${colors.gray};
+  }
 `;
 
-const BookImg = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 20rem;
-  height: 27rem;
-`;
-
-const BookInfoBox = styled.div`
-  padding: 0 1.5vw;
+const InfoBox = styled.div`
+  padding: 5% 2%;
   text-decoration: none;
+  border-top: 3px solid ${colors.gray};
+  .author {
+    margin-bottom: 0.5em;
+    ${fontStyles.mini}
+  }
 `;
