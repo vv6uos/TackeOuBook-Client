@@ -80,7 +80,8 @@ const Wrapper = styled.div`
 `;
 
 const Footer = styled.footer`
-  height: 8rem;
+  margin-top: 3rem;
+  height: 6rem;
   color: white;
   background-color: ${colors.d1};
 `;
