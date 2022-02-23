@@ -31,12 +31,12 @@ const fontStyles = {
     font-size: 2rem;
   `,
   body: css`
-    font-family: ${fonts.d2};
+    font-family: ${fonts.m};
     color: ${colors.d1};
     font-size: 1rem;
   `,
   mini: css`
-    font-family: ${fonts.d1};
+    font-family: ${fonts.s};
     color: gray;
     font-size: 0.6rem;
   `,
