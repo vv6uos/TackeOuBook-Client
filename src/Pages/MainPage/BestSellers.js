@@ -19,7 +19,7 @@ function BestSellers() {
     <Wrapper>
       <Title>
         <AladinLogo src="https://image.aladin.co.kr/img/blog2/main/aladdin_logo.gif" />
-        베스트셀러{" "}
+        <div>베스트셀러</div>
       </Title>
       <Container alt="베스트셀러">
         {bestsellers.map((bestseller) => {
@@ -70,13 +70,16 @@ const Wrapper = styled.div`
 `;
 const AladinLogo = styled.img`
   width: 8rem;
-  height: 2.2rem;
+  height: 3rem;
   margin: 0 0.5em;
 `;
 
 const Title = styled.div`
-  margin-top: 2rem;
+  display: flex;
+  margin-top: 1rem;
   ${fontStyles.semiTitle}
+  font-size:1.5rem;
+  line-height: 3.7rem;
 `;
 const Container = styled.div`
   display: flex;
@@ -84,7 +87,7 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  margin: 1.5rem;
+  margin: 0 1.5rem 0 1.5rem;
   width: 100%;
   max-width: 250px;
   ${fontStyles.body};
@@ -92,13 +95,15 @@ const Card = styled.div`
 const BookImg = styled.img`
   border: 3px solid ${colors.gray};
   display: block;
-  margin: 0 auto;
+  margin: 5% auto;
   height: 12rem;
   min-height: 100px;
   max-height: 270px;
 `;
 
 const BookInfoBox = styled.div`
+  ${fontStyles.smbold};
+  font-size: 0.8rem;
   border-top: 3px solid ${colors.gray};
   padding: 1rem;
 `;
