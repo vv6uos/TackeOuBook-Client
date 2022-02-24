@@ -1,18 +1,29 @@
-//-----외부 소스
+//-----import 외부
 import { React, useState, useEffect } from "react";
-
 import styled from "styled-components";
 import axios from "axios";
 
-//-----내부 소스
-import { API_URL } from "config/constants";
+//-----import 내부
 import { myCSS, myTheme } from "style";
+import { API_URL } from "config/constants";
 import { MyLink } from "components";
 
+//-----메인
 function Books() {
+  //state
   const [books, setBooks] = useState([]);
+  //함수 서버에서 books 데이터를 받아 state에 저장
   useEffect(() => {
-    AxiosBooks({ setBooks });
+    axios
+      .get(`${API_URL}/books`)
+      .then((result) => {
+        const books = result.data;
+        setBooks(books);
+        console.log("판매도서 데이터 전송 성공 : ", books);
+      })
+      .catch((err) => {
+        console.log("실패 :", err);
+      });
   }, []);
 
   return (
@@ -41,21 +52,6 @@ function Books() {
   );
 }
 export default Books;
-
-//-----함수
-
-function AxiosBooks({ setBooks }) {
-  axios
-    .get(`${API_URL}/books`)
-    .then((result) => {
-      const books = result.data;
-      setBooks(books);
-      console.log("판매도서 데이터 전송 성공 : ", books);
-    })
-    .catch((err) => {
-      console.log("실패 :", err);
-    });
-}
 
 //-----스타일
 const { fontStyles, colors } = myTheme;

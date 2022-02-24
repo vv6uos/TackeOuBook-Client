@@ -1,18 +1,24 @@
-//-----외부
+//-----import 외부
 import styled from "styled-components";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
 
-//-----내부
-import { API_URL } from "config/constants";
+//-----import 내부
 import { myCSS, myTheme } from "style/index";
+import { API_URL } from "config/constants";
 
 //-----메인 함수
 
 function BestSellers() {
+  //state
   const [bestsellers, setBestsellers] = useState([]);
+
+  //함수 : 서버에서 besellers를 받아와 state에 저장
   useEffect(() => {
-    AxiosBestsellers({ setBestsellers });
+    axios.get(`${API_URL}/bestsellers`).then((result) => {
+      const bestsellers = result.data;
+      setBestsellers(bestsellers);
+    });
   }, []);
 
   return (
@@ -43,21 +49,6 @@ function BestSellers() {
   );
 }
 export default BestSellers;
-
-//-----함수
-
-function AxiosBestsellers({ setBestsellers }) {
-  axios
-    .get(`${API_URL}/bestsellers`)
-    .then((result) => {
-      const bestsellers = result.data;
-      console.log("베스트셀러 데이터 전송 성공 : ", bestsellers);
-      setBestsellers(bestsellers);
-    })
-    .catch((err) => {
-      console.log("실패 :", err.response);
-    });
-}
 
 //-----스타일
 
