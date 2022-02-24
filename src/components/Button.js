@@ -1,7 +1,9 @@
-import styled, { css } from "styled-components";
-import { myTheme } from "style";
-const { fonts, colors } = myTheme;
-//Button
+//-----import 외부
+import styled from "styled-components";
+//----import 내부
+import { myTheme } from "style/index";
+
+//----메인 재사용가능한 버튼 컴포넌트
 function Button({ children, ...props }) {
   return (
     <BasicStyle type="button" {...props}>
@@ -12,7 +14,8 @@ function Button({ children, ...props }) {
 
 export default Button;
 
-//Style
+//-----스타일
+const { fonts, colors } = myTheme;
 const defaultStyle = css`
   box-sizing: content-box;
   -webkit-appearance: none;

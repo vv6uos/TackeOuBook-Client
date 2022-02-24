@@ -1,8 +1,9 @@
+//-----import 외부
 import styled from "styled-components";
-
-//내부
+//----import 내부
 import { myTheme } from "style/index";
 
+//-----메인 : input과 label이 함께있는 컴포넌트
 export default function InputWithLabel({
   children,
   flexDirection,
@@ -21,17 +22,14 @@ export default function InputWithLabel({
   );
 }
 
+//-----스타일
 const { fonts, colors } = myTheme;
-
 const Item = styled.div`
   display: flex;
   flex-direction: ${(p) => p.flexDirection || "row"};
   height: ${(p) => p.itemHeight || "3rem"};
   max-width: 400px;
- 
-}
 `;
-
 const Label = styled.label`
   width: ${(p) => p.labelWidth || "6.6rem"};
   min-width: 60px;
@@ -40,7 +38,6 @@ const Label = styled.label`
   font-family: ${fonts.m};
   font-size: 1.2rem;
 `;
-
 const Input = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;

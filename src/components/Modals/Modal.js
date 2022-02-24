@@ -1,8 +1,12 @@
+//-----import 외부
 import styled from "styled-components";
+//----import 내부
 import { myTheme } from "style";
-const { colors } = myTheme;
 
+//-----메인 : 모달창 기본 틀 컴포넌트
 function Modal(props) {
+  //props에서 pop상태에 따라 창이 닫히고 열린다
+  //props title을 받아오고 content를 받아온다
   const { open, close, title, content } = props;
   return (
     <Wrapper className={open ? "openModal" : ""}>
@@ -16,9 +20,10 @@ function Modal(props) {
     </Wrapper>
   );
 }
-
 export default Modal;
 
+//-----스타일
+const { colors } = myTheme;
 const Wrapper = styled.div`
   display: none;
   position: fixed;

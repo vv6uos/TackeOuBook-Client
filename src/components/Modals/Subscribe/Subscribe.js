@@ -1,12 +1,17 @@
+//-----import 외부
 import styled from "styled-components";
-
-import { Button } from "components";
 import { useNavigate } from "react-router-dom";
+
+//-----import 내부
+import { Button } from "components";
 import onChangeSubscribe from "./onChangeSubscribe";
 
+//-----메인
 function SubscribePop(props) {
-  const { close, isMember } = props;
   const navigate = useNavigate();
+  //props
+  const { close, isMember } = props;
+  //이벤트함수 : 구독하기 버튼 클릭시 로그인 유무에 따라 모달창 생성 
   const onSubscribe = () => {
     if (isMember.login) {
       onChangeSubscribe(isMember.id, true);
@@ -29,6 +34,7 @@ function SubscribePop(props) {
 
 export default SubscribePop;
 
+//-----스타일
 const Main = styled.div`
   padding: 5rem;
   border-bottom: 1px solid #dee2e6;

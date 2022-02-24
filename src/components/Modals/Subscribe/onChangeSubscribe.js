@@ -1,7 +1,11 @@
+//-----import 외부
 import axios from "axios";
+//-----import 내부
 import { API_URL } from "config/constants";
 
+//-----메인 구독자=>구독취소  비구독자=>구독하기 로 정보변경하는 함수 
 function onChangeSubscribe(id, $subscribe) {
+  //props 에서 받아온 유저의 구독정보에 따라 메시지와 변경될 구독 정보 반환
   const changeValue = $subscribe
     ? {
         msg: "구독해주셔서 감사합니다",
