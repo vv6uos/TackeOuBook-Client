@@ -1,21 +1,23 @@
-//-----import 외부 소스
+//-----import 외부
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
-//-----import 내부 소스
-import { InputWithLabel, Button } from "components/index";
+//-----import 내부
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
+import { InputWithLabel, Button } from "components/index";
 
-const { colors, fontStyles } = myTheme;
-
+//-----메인
 function LoginPage() {
+  //State : input의 value를 저장하기 위한 state
   const [inputs, setInputs] = useState({
     id: "",
     password: "",
   });
+
+  //이벤트함수: input의 value가 바뀔때마다 value를 inputs 저장=
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputs({
@@ -23,9 +25,8 @@ function LoginPage() {
       [name]: value,
     });
   };
-
+  //이벤트함수: 로그인 버튼 클릭시 정보가 유효한지 확인하고 userSession을 생성
   const onSubmit = (e) => {
-    e.preventDefault();
     axios
       .post(
         `${API_URL}/userSession/create`,
@@ -36,27 +37,27 @@ function LoginPage() {
         { withCredentials: true }
       )
       .then((result) => {
-        console.log("AXiOS LOGIN POST :");
+        //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
         const user = result.data.user;
+        //유저 데이터에 담긴 검증 결과에 따라 다른 alert메서드 사용
         if (user.isLogin) {
-          console.log("LOGIN RESULT", user);
           alert(`${user.name}님, 안녕하세요`);
           window.location.replace("/");
         } else {
-          console.log("LOGIN RESULT ERROR");
           alert("아이디와 비밀번호를 확인부탁드립니다");
         }
       })
       .catch((err) => {
-        console.log("AXiOS LOGIN POST : ERR");
         alert("[/createSession server ERROR]=> 관리자에게 문의 부탁드립니다");
       });
   };
+
+  //-----메인
   return (
     <Wrapper>
       <Container>
         <Title>로그인</Title>
-        <Form onSubmit={onSubmit}>
+        <Form>
           <InputWithLabel type="text" name="id" onChange={onChange} required>
             아이디
           </InputWithLabel>
@@ -68,7 +69,12 @@ function LoginPage() {
           >
             비밀번호
           </InputWithLabel>
-          <Button type="submit" width="20rem" maxWidth="250px">
+          <Button
+            type="submit"
+            onClick={onSubmit}
+            width="20rem"
+            maxWidth="250px"
+          >
             로그인
           </Button>
         </Form>
@@ -81,6 +87,7 @@ function LoginPage() {
 export default LoginPage;
 
 //-----스타일
+const { colors, fontStyles } = myTheme;
 const Wrapper = styled.div`
   ${myCSS.center}
   width: 26.6rem;

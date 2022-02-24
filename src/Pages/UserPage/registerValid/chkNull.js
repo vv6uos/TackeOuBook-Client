@@ -1,32 +1,19 @@
-import { matchPw } from "./index";
-function chkNull(e, inputs, setInv, setValid) {
-  const errMsg = "필수 정보입니다.";
-  const errMsg_chkPw = "비밀번호 확인이 필요합니다.";
+//필수정보에 해당하는 요소의 value가 유효하지 않은 상태로 변경
+//필수정보에 해당하지 않는 요소를 유효한 상태로 변경 
+function chkNull(e, setInv, setValid) {
   const { name, value } = e.target;
   if (value.length === 0) {
     switch (name) {
       case "id":
       case "password":
       case "name":
-        setInv(inputs, name, value, errMsg);
-        break;
-      case "chkPassword":
-        setInv(inputs, name, value, errMsg_chkPw);
+        setInv(name, value, "필수 정보입니다");
         break;
       default:
-        setValid(inputs, name, value);
+        setValid(name, value);
         break;
     }
-  } else {
-    matchPw(
-      inputs,
-      inputs.password.value,
-      inputs.chkPassword.value,
-      setInv,
-      setValid
-    );
   }
-  console.log(name, "CHKNULL: ", inputs[name].valid);
   return;
 }
 export default chkNull;

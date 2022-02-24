@@ -4,15 +4,14 @@ import React, { useState } from "react";
 import axios from "axios";
 
 //-----import 내부 소스
-import { InputWithLabel, Button } from "components/index";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
-import { chkNull, chkLetter } from "./registerValid/index.js";
+import { InputWithLabel, Button } from "components/index";
+import { chkNull, chkLetter, matchPw } from "./registerValid/index.js";
 
-const { colors, fontStyles } = myTheme;
-
-// 메인 컴포넌트
+//-----메인
 function RegisterPage() {
+  //State : input의 value,valid,errmessage를 저장함
   const [inputs, setInputs] = useState({
     id: {
       value: "",
@@ -50,9 +49,13 @@ function RegisterPage() {
       errMessage: "",
     },
   });
+  //변수: inputs의  key와 value를 각각 저장
   const { id, password, chkPassword, name, email, address, phoneNumber } =
     inputs;
-  const setInv = (inputs, name, value, $errMessage) => {
+
+  //함수: 요소의 value가 유효하지 않은 상태를 Inputs에 저장하는 함수
+  const setInv = (name, value, $errMessage) => {
+    //name과 동일한 inputs의 key를 가진 요소를 찾아 valid값을 false로 바꾸고 오류메세지 저장
     setInputs({
       ...inputs,
       [name]: {
@@ -62,7 +65,9 @@ function RegisterPage() {
       },
     });
   };
-  const setValid = (inputs, name, value) => {
+  //함수 : 요소의 value가 유효하다는 상태를 Inputs에 저장하는 함수
+  const setValid = (name, value) => {
+    //name과 동일한 inputs의 key를 가진 요소를 찾아 valid값을 true, 오류메세지 제거
     setInputs({
       ...inputs,
       [name]: {
@@ -73,19 +78,28 @@ function RegisterPage() {
     });
   };
 
+  //이벤트함수: innput이 onBlur상태일 때 유효성검사 실행
   const onBlur = (e) => {
-    const { name } = e.target;
-    chkNull(e, inputs, setInv, setValid);
-    console.log("입력 끝....onBlur");
-    console.log(name, ":", inputs[name]);
-    console.log("");
+    //공백을 체크하는 함수 실행
+    chkNull(e, setInv, setValid);
+    //비밀번호 검증 함수 실행 (*확인이 마친 후 비밀번호 변경했을 시 오류 방지)
+    if (e.target.name === "password" || e.target.name === "chkPassword") {
+      matchPw(password.value, chkPassword.value, setInv, setValid);
+    }
   };
+  //이벤트함수: 변화하는 value값에 따른 유효성 검사 실행
   const onChange = (e) => {
-    console.log("회원가입 폼 입력중....");
-    chkLetter(e, inputs, setInv, setValid);
+    const { name, value } = e.target;
+    //비밀번호 확인일때는 비밀번호 검증을 , 그외는 양식검사 실행
+    if (name === "chkPassword") {
+      matchPw(password.value, value, setInv, setValid);
+    } else {
+      chkLetter(e, setInv, setValid);
+    }
   };
-
+  //이벤트함수 : 버튼 활성화 / 비활성화를 결정함
   const onDisabled = () => {
+    //  inputs의 모든 valid가 true일 경우에만 가입하기 버튼이 활성화
     let result = true;
     if (
       id.valid &&
@@ -100,9 +114,9 @@ function RegisterPage() {
     }
     return Boolean(result);
   };
-  const onSubmit = (e) => {
-    console.log("제출중....", inputs);
 
+  //이벤트함수 : 가입하기 버튼을 클릭했을 때 서버에 inputs value들을 전송 , 회원가입의 결과를 알려줌
+  const onSubmit = (e) => {
     axios
       .post(`${API_URL}/register`, {
         user_id: id.value,
@@ -201,6 +215,7 @@ function RegisterPage() {
 export default RegisterPage;
 
 //-----스타일
+const { colors, fontStyles } = myTheme;
 const Wrapper = styled.div`
   ${myCSS.center}
   width: 40rem;
@@ -233,7 +248,6 @@ function Input({ children, InvalidMessage, $Valid, ...rest }) {
       flexDirection="column"
       itemHeight="4.2rem"
       inputWidth="24rem"
-      $Valid={$Valid}
       InvalidMessage={InvalidMessage}
       {...rest}
     >
