@@ -39,13 +39,15 @@ const BasicStyle = styled.button`
   }
 
   margin: ${(props) => props.margin || "0.4rem"};
-  padding: ${(props) => props.padding || "0.8rem"};
-  width: ${(props) => props.width || "6rem"};
-  height: ${(props) => props.height || "1.5rem"};
+
+  padding: ${(props) => props.padding || "0.5rem"};
+  width: ${(props) => props.width || "5rem"};
+  height: ${(props) => props.height || "1.2rem"};
   max-width: ${(props) => props.maxWidth || "120px"};
   min-width: ${(props) => props.minWidth || "45px"};
+
   font-family: ${(props) => props.fontFam || fonts.s};
-  font-size: ${(props) => props.fontSize || "1.2rem"};
+  font-size: ${(props) => props.fontSize || "1rem"};
 
   background-color: ${(props) => props.bgColor || colors.m1};
   color: ${(props) => props.color || colors.bg};
