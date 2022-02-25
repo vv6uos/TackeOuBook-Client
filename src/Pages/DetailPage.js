@@ -7,7 +7,7 @@ import styled from "styled-components";
 //-----import 내부
 import { myCSS, myTheme } from "style";
 import { API_URL } from "config/constants";
-import { Button, Modal, SubscribePop } from "components";
+import { Button, Modal, SubscribePop, RentPop } from "components";
 
 //----- 메인
 function DetailPage({ isMember }) {
@@ -36,7 +36,7 @@ function DetailPage({ isMember }) {
         title="대여"
         open={pop}
         close={onClosePop}
-        content={<div>대여하기?</div>}
+        content={<RentPop close={onClosePop} />}
       />
     ) : (
       <Modal
