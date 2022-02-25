@@ -48,7 +48,7 @@ function DetailPage({ isMember }) {
     );
   };
   //이벤트함수: 대여하기 버튼 클릭시 isPop에 따라 팝업생성  , 구독자=>대여팝업 , 비구독자=>구독팝업
-  const onClickRent = () => {
+  const onClickRentBtn = () => {
     setPop(true);
   };
   //이벤트함수 : 팝업창 닫기 기능
@@ -69,9 +69,14 @@ function DetailPage({ isMember }) {
             <div className="info">| {book.author}</div>
             <div className="info">| {book.publisher}</div>
           </Infos>
-          <Button margin={"0"} onClick={onClickRent}>
-            대여하기
-          </Button>
+          {/**대여여부에 따라 대여버튼이 활성화, 대여중 이라는 메세지 표시 */}
+          {book.onRent ? (
+            <div className="NotRentMsg">이 책은 누군가 대여중입니다</div>
+          ) : (
+            <Button margin={"0"} onClick={onClickRentBtn}>
+              대여하기
+            </Button>
+          )}
         </div>
       </Container>
     </Wrapper>
@@ -100,6 +105,10 @@ const Container = styled.div`
   justify-content: center;
   .right {
     ${myCSS.flexColumn}
+    .NotRentMsg {
+      ${fontStyles.body}
+      color:red;
+    }
   }
 `;
 const Img = styled.img`
