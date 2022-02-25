@@ -14,6 +14,8 @@ function MyLink({ children, to, fontColor, margin }) {
 }
 export default MyLink;
 
+//-----스타일
+
 const { colors, fontStyles } = myTheme;
 
 const StyledLink = styled(Link)`

@@ -1,5 +1,5 @@
 //-----import 외부
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 //----import 내부
 import { myTheme } from "style/index";
 

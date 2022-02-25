@@ -3,7 +3,7 @@ import styled from "styled-components";
 //----import 내부
 import { MyLink } from "components";
 
-//-----메인 로고이미지를 받아오고 이미지 클릭시 메인페이지로 이동
+//-----메인 로고이미지 클릭시 메인페이지로 이동하는 로고 컴포넌트
 function Logo() {
   return (
     <MyLink to="/">
