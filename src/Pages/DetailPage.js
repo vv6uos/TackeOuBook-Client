@@ -1,55 +1,78 @@
-//-----외부 소스
+//-----import 외부
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-//-----내부 소스
-import Button from "components/Button";
-import { API_URL } from "config/constants";
+//-----import 내부
 import { myCSS, myTheme } from "style";
+import { API_URL } from "config/constants";
+import { Button, Modal, SubscribePop } from "components";
 
-const { fontStyles, colors } = myTheme;
-
-function DetailPage() {
-  const { id } = useParams([]);
-  const [book, setBook] = useState();
-  console.log("비동기처리test", book);
+//----- 메인
+function DetailPage({ isMember }) {
+  //state 서버에서 받아온 book의 정보가 담길 변수
+  const [book, setBook] = useState({});
+  //state 팝업창의 여닫기를 설정하는 값이 담긴 변수
+  const [pop, setPop] = useState(false);
+  //변수 path에서 받아올 변수
+  const { id } = useParams("");
+  //서버 books DB에서 id에 맞는 book정보 받아오는 함수
   useEffect(() => {
-    AxiosBook({ setBook, id });
+    axios
+      .get(`${API_URL}/books/${id}`)
+      .then((result) => {
+        const book = result.data;
+        setBook(book);
+      })
+      .catch((err) => {
+        console.log("실패 :", err);
+      });
   }, [id]);
-  if (book === undefined) {
-    return <span>상품정보를 받아오고 있는중입니다.</span>;
-  }
+  //함수 :  구독자 여부에 따라 구독팝업 또는 대여팝업 생성
+  const isPop = () => {
+    return isMember.subscribe ? (
+      <Modal
+        title="대여"
+        open={pop}
+        close={onClosePop}
+        content={<div>대여하기?</div>}
+      />
+    ) : (
+      <Modal
+        title="대여"
+        open={pop}
+        close={onClosePop}
+        content={<SubscribePop close={onClosePop} isMember={isMember} />}
+      />
+    );
+  };
+  //이벤트함수: 대여하기 버튼 클릭시 isPop에 따라 팝업생성  , 구독자=>대여팝업 , 비구독자=>구독팝업
+  const onClickRent = () => {
+    setPop(true);
+  };
+  //이벤트함수 : 팝업창 닫기 기능
+  const onClosePop = () => {
+    setPop(false);
+  };
 
   return (
     <Wrapper>
-      <TitleBox>
-        `{book.id} {book.name}`
-      </TitleBox>
+      {/* {대여버튼 클릭시 pop상태(회원정보)에 따라 모달창 생성} */}
+      {pop && isPop()}
+      <TitleBox>{book.name}</TitleBox>
       <Container>
         <Img src={`${book.imgURL}`} alt="책이미지" id="image" />
-        <Box>
-          <InfoBox>
-            <Info>
-              <Label>판매자</Label>
-              <div className="info">{book.seller}</div>
-            </Info>
-            <Info>
-              <Label>판매가</Label>
-              <div className="info">{book.price.toLocaleString()}원</div>
-            </Info>
-            <Info>
-              <Label>상품상태</Label>
-              <div className="info">상</div>
-            </Info>
-            <Info>
-              <Label>도서소개</Label>
-              <div className="info">투자명인 ㅇㅇㅇㅇ가 썼씁니다</div>
-            </Info>
-          </InfoBox>
-          <Button onClick={onClickRent}>대여하기</Button>
-        </Box>
+        <div className="right">
+          <Infos>
+            <div className="info">{book.description}</div>
+            <div className="info">| {book.author}</div>
+            <div className="info">| {book.publisher}</div>
+          </Infos>
+          <Button margin={"0"} onClick={onClickRent}>
+            대여하기
+          </Button>
+        </div>
       </Container>
     </Wrapper>
   );
@@ -57,67 +80,37 @@ function DetailPage() {
 
 export default DetailPage;
 
-//----- 함수
-
-function AxiosBook({ setBook, id }) {
-  axios
-    .get(`${API_URL}/books/${id}`)
-    .then((result) => {
-      const book = result.data;
-      setBook(book);
-      console.log("판매도서 데이터 전송 성공 : ", book);
-    })
-    .catch((err) => {
-      console.log("실패 :", err);
-    });
-}
-
-function onClickRent() {
-  console.log("대여하기 버튼 클릭");
-}
 //----- 스타일
-const Wrapper = styled.div``;
-const TitleBox = styled.div`
-  ${fontStyles.mainTitle}
+const { fontStyles, colors } = myTheme;
+const Wrapper = styled.div`
   margin-top: 5rem;
-  height: 5rem;
+`;
+const TitleBox = styled.div`
+  ${fontStyles.smbold}
+  font-size:1.5rem;
+
   padding: 1.5rem;
   border-bottom: 2px solid ${colors.d1};
 `;
 const Container = styled.div`
   background-color: ${colors.l1};
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding: 5rem 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-`;
-const Img = styled.img`
-  height: 30rem;
-`;
-const Box = styled.div`
-  ${myCSS.flexColumn}
-`;
-const InfoBox = styled.div`
-  width: 60vmin;
-  min-width: 200px;
-  max-width: 500px;
-`;
-
-const Info = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  font-size: 1.5rem;
-  border-bottom: 1px solid gray;
-  margin: 1rem auto;
-
-  .info {
-    ${fontStyles.body}
+  justify-content: center;
+  .right {
+    ${myCSS.flexColumn}
   }
 `;
-
-const Label = styled.div`
-  width: 10vw;
-  min-width: 50px;
-  max-width: 100px;
+const Img = styled.img`
+  margin: 0 5rem;
+  height: 22rem;
+`;
+const Infos = styled.div`
+  margin-top: 1.5rem;
+  width: 30rem;
+  .info {
+    ${fontStyles.body}
+    margin-bottom: 1rem;
+  }
 `;
