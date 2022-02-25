@@ -1,18 +1,29 @@
-//외부 import
+//-----import 외부
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-//내부 import
+//-----import 내부
 import { myTheme } from "style";
 import { API_URL } from "config/constants";
 import { NavButton, SubscribeButton, BookContainer } from "./Nav_buttons/index";
 
-//메인
+//----메인 로그인한 회원 유저에게만 보여지는 navigtion컴포넌트<마이페이지,로그아웃>
 function MemberNav({ isMember, setPop }) {
   const navigate = useNavigate();
+  //이벤트함수: 로그아웃 버튼 클릭 시 , 서버에서 유저세션을 삭제
   const onLogout = () => {
-    AxiosToLogout();
+    axios
+      .get(`${API_URL}/userSession/delete`, { withCredentials: true })
+      .then((result) => {
+        console.log("AXIOS LOGOUT: SUCCESS");
+        console.log("로그아웃....", result.data);
+        window.location.reload(true);
+      })
+      .catch((err) => {
+        console.log("AXIOS LOGOUT: ERROR");
+      });
   };
+  //이벤트함수 : 구독 버튼을 클릭시 구독자이면 마이페이지>구독현황으로 이동, 비구독자면 구독팝업 생성
   const onClickSubscribeBtn = () => {
     if (!isMember.subscribe) {
       setPop(true);
@@ -39,22 +50,7 @@ function MemberNav({ isMember, setPop }) {
 
 export default MemberNav;
 
-//함수
-
-const AxiosToLogout = () => {
-  axios
-    .get(`${API_URL}/userSession/delete`, { withCredentials: true })
-    .then((result) => {
-      console.log("AXIOS LOGOUT: SUCCESS");
-      console.log("로그아웃....", result.data);
-      window.location.reload(true);
-    })
-    .catch((err) => {
-      console.log("AXIOS LOGOUT: ERROR");
-    });
-};
-
-//스타일
+//----스타일
 
 const { fonts, colors } = myTheme;
 

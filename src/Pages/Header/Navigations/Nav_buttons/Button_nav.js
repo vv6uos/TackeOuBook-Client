@@ -1,11 +1,9 @@
-//외부import
+//-----import 외부
 import { useNavigate } from "react-router-dom";
-
-//내부 import
+//-----import 내부 
 import { myTheme } from "style";
 import { Button } from "components";
-
-//메인
+//-----메인 네비게이션에서 원하는 페이지로 이동하게 만드는 버튼 컴포넌트 
 function NavButton({ children, moveTo, onClick, width, color, ...props }) {
   const navigate = useNavigate();
   const { fonts, colors } = myTheme;
