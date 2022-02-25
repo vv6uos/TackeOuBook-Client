@@ -3,9 +3,9 @@ import styled, { css } from "styled-components";
 //-----import 내부
 import { myCSS, myTheme } from "style";
 import { Button } from "components";
-import onChangeSubscribe from "components/Modals/Subscribe/onChangeSubscribe";
+import { onChangeSubscribe } from "function";
 
-//-----메인 회원의 구독정보를 제공하는 컴포넌트 
+//-----메인 회원의 구독정보를 제공하는 컴포넌트
 function MySubscribe({ isMember }) {
   //props에서 유저정보를 받아옴
   const { id, subscribe, name } = isMember;
