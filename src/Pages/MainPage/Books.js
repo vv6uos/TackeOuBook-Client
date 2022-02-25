@@ -34,6 +34,7 @@ function Books() {
           return (
             <Card key={book.id}>
               <MyLink to={`/books/${book.id}`}>
+                {book.onRent && <RentBlur />}
                 <img
                   className="bookCover"
                   src={`${book.imgURL}`}
@@ -74,14 +75,42 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  margin: 1rem 0.5rem;
-  flex-basis: 23.5%;
+  margin: 2% 1%;
+  width: 23%;
   ${fontStyles.body};
+  z-index: 1;
+  @media screen and (max-width: 768px) {
+    margin: 2.1%;
+    width: 29%;
+  }
+  @media screen and (max-width: 480px) {
+    margin: 2% 3%;
+    width: 44%;
+  }
   .bookCover {
     display: block;
     margin: 5% auto;
     height: 15.46rem;
+    max-width: 100%;
     border: 3px solid ${colors.gray};
+  }
+`;
+const RentBlur = styled.div`
+  position: absolute;
+  width: 23%;
+  max-width: 276px;
+  height: 29rem;
+  opacity: 0.7;
+  z-index: 2;
+  background-color: ${colors.gray};
+  border-radius: 0.5rem;
+  pointer-events: none;
+  z-index: 1;
+  @media screen and (max-width: 768px) {
+    width: 29%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 44%;
   }
 `;
 
