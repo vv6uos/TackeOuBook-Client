@@ -1,17 +1,21 @@
-//-----import 외부 소스
+//-----import 외부
 import styled, { css } from "styled-components";
-import React, { useState, useEffect } from "react";
-import { Button } from "components";
-import axios from "axios";
-import { API_URL } from "config/constants";
-import onChangeSubscribe from "components/Modals/Subscribe/onChangeSubscribe";
+//-----import 내부
 import { myCSS, myTheme } from "style";
+import { Button } from "components";
+import onChangeSubscribe from "components/Modals/Subscribe/onChangeSubscribe";
 
+//-----메인 회원의 구독정보를 제공하는 컴포넌트 
 function MySubscribe({ isMember }) {
+  //props에서 유저정보를 받아옴
   const { id, subscribe, name } = isMember;
+
+  //이벤트함수 : 유저가 구독정보변경 컴포넌트의 버튼 클릭시 발생하는 함수
   const onSubscribe = () => {
     onChangeSubscribe(id, !subscribe);
   };
+
+  //구독자이면 구독취소에 대한 내용과 버튼 활성화, 비구독자이면 구독 내용과 버튼 활성화
   if (subscribe) {
     var word = {
       info: "구독중",
@@ -35,7 +39,7 @@ function MySubscribe({ isMember }) {
         <Info className="subscribe">{word.info}</Info>
         <Info>입니다</Info>
       </Brief>
-      <Container>
+      <Container className="userSubscribeChangeCompnt">
         <Subject>{word.subj}</Subject>
         <Contents>{word.cont}</Contents>
         <Button margin="0 0 0 70%" onClick={onSubscribe}>
@@ -52,6 +56,7 @@ function MySubscribe({ isMember }) {
 
 export default MySubscribe;
 
+//-----스타일
 const { flexColumn, center } = myCSS;
 const { fontStyles, colors } = myTheme;
 const containerStyle = css`

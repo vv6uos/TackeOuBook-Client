@@ -1,15 +1,12 @@
-//-----외부
+//-----import 외부
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
-
-import React from "react";
-
-//-----내부
-import { MyLink } from "components";
-
+//-----import 내부
 import { myCSS, myTheme } from "style/index";
+import { MyLink } from "components";
 import { MySubscribe, MyInfos, MyRental } from "./components/index";
 
+//-----메인 회원 정보를 제공하는 컴포넌트의 기본 틀
 function MyPage({ isMember }) {
   return (
     <Wrapper>
@@ -35,6 +32,7 @@ function MyPage({ isMember }) {
 
 export default MyPage;
 
+//-----스타일
 const { flexColumn } = myCSS;
 const { colors, fonts } = myTheme;
 
