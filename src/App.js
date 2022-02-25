@@ -55,7 +55,10 @@ function App() {
           <Routes>
             <Route path={"/"} element={<MainPage />} />
             <Route path={"/upload"} element={<UploadPage />} />
-            <Route path={"/books/:id"} element={<DetailPage />} />
+            <Route
+              path={"/books/:id"}
+              element={<DetailPage isMember={isMember} />}
+            />
             <Route path={"/test"} element={<TestPage />} />
             <Route path={"/login"} element={<LoginPage />} />
             <Route path={"/register"} element={<RegisterPage />} />
