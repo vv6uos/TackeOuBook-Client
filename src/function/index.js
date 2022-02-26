@@ -1,1 +1,1 @@
-export { default as onChangeSubscribe } from "./onChangeSubscribe.js";
+export { default as changeSubscribeStatus } from "./changeSubscribeStatus.js";
