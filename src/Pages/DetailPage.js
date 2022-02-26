@@ -10,7 +10,7 @@ import { API_URL } from "config/constants";
 import { Button, Modal, SubscribePop, RentPop } from "components";
 
 //----- 메인
-function DetailPage({ isMember }) {
+function DetailPage({ user }) {
   //state 서버에서 받아온 book의 정보가 담길 변수
   const [book, setBook] = useState({});
   //state 팝업창의 여닫기를 설정하는 값이 담긴 변수
@@ -31,7 +31,7 @@ function DetailPage({ isMember }) {
   }, [id]);
   //함수 :  구독자 여부에 따라 구독팝업 또는 대여팝업 생성
   const isPop = () => {
-    return isMember.subscribe ? (
+    return user.isSubscriber ? (
       <Modal
         title="대여"
         open={pop}
@@ -43,7 +43,7 @@ function DetailPage({ isMember }) {
         title="대여"
         open={pop}
         close={onClosePop}
-        content={<SubscribePop close={onClosePop} isMember={isMember} />}
+        content={<SubscribePop close={onClosePop} user={user} />}
       />
     );
   };

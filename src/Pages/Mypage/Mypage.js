@@ -7,7 +7,7 @@ import { MyLink } from "components";
 import { MySubscribe, MyInfos, MyRental } from "./components/index";
 
 //-----메인 회원 정보를 제공하는 컴포넌트의 기본 틀
-function MyPage({ isMember }) {
+function MyPage({ user }) {
   return (
     <Wrapper>
       <Nav>
@@ -19,10 +19,7 @@ function MyPage({ isMember }) {
       <Container>
         <Routes>
           <Route path={"/myinfo"} element={<MyInfos />} />
-          <Route
-            path={"/mysubscribe"}
-            element={<MySubscribe isMember={isMember} />}
-          />
+          <Route path={"/mysubscribe"} element={<MySubscribe user={user} />} />
           <Route path={"/myrental"} element={<MyRental />} />
         </Routes>
       </Container>

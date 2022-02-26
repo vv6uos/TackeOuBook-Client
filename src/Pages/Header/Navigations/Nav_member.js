@@ -8,7 +8,7 @@ import { API_URL } from "config/constants";
 import { NavButton, SubscribeButton, BookContainer } from "./Nav_buttons/index";
 
 //----메인 로그인한 회원 유저에게만 보여지는 navigtion컴포넌트<마이페이지,로그아웃>
-function MemberNav({ isMember, setPop }) {
+function MemberNav({ user, setPop }) {
   const navigate = useNavigate();
   //이벤트함수: 로그아웃 버튼 클릭 시 , 서버에서 유저세션을 삭제
   const onLogout = () => {
@@ -25,11 +25,11 @@ function MemberNav({ isMember, setPop }) {
   };
   //이벤트함수 : 구독 버튼을 클릭시 구독자이면 마이페이지>구독현황으로 이동, 비구독자면 구독팝업 생성
   const onClickSubscribeBtn = () => {
-    if (!isMember.subscribe) {
-      setPop(true);
-    } else {
+    if (user.isSubscriber) {
       setPop(false);
       navigate("/mypage/mysubscribe");
+    } else {
+      setPop(true);
     }
   };
 
@@ -37,7 +37,7 @@ function MemberNav({ isMember, setPop }) {
     <Nav>
       <LeftContainer>
         <BookContainer />
-        <User>{`${isMember.name}님`}</User>
+        <User>{`${user.name}님`}</User>
         <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
       <RightContainer>
