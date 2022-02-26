@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   min-height: inherit;
 
   background-color: ${colors.gray};
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 480px) {
     ${flexColumn};
   }
 `;
@@ -50,7 +50,7 @@ const Nav = styled.div`
 
   padding: 5rem 2rem;
   background-color: ${colors.bg};
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 480px) {
     padding: 1rem 2rem 0rem 1.2rem;
     width: 100%;
     flex-basis: 3rem;
@@ -73,6 +73,7 @@ const NavTitle = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
+  padding: 5rem 0;
 
   background-color: ${colors.gray};
 `;
