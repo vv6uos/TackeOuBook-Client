@@ -36,7 +36,7 @@ function DetailPage({ user }) {
         title="대여"
         open={pop}
         close={onClosePop}
-        content={<RentPop close={onClosePop} id={id} />}
+        content={<RentPop close={onClosePop} id={id} user={user} />}
       />
     ) : (
       <Modal

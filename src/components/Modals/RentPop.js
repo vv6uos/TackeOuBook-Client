@@ -7,15 +7,15 @@ import { myTheme } from "style";
 import { API_URL } from "config/constants";
 import { Button } from "components";
 
-//-----메인 구독자에게 대여의사를 묻고 책의대여상태를 변경하는 팝업내용부분 
+//-----메인 구독자에게 대여의사를 묻고 책의대여상태를 변경 , userBooks데이터 생성
 function RentPop(props) {
-  const { close, id } = props;
+  const { close, id, user } = props;
 
   //이벤트함수 : 대여하기 버튼 클릭시 책의 대여상태 변경되고 userBooks 데이터가 추가됨
-  const onChangeRentStatus = () => {
+  const rentBook = () => {
     console.log(id);
     axios
-      .get(`${API_URL}/books/${id}/changeRentStatus`)
+      .post(`${API_URL}/books/${id}/rent`, { memberId: user.id })
       .then((result) => {
         if (result.data) {
           alert(
@@ -36,7 +36,7 @@ function RentPop(props) {
     <>
       <Main>이 책을 대여하시겠습니까?</Main>
       <Footer>
-        <Button onClick={onChangeRentStatus}>대여하기</Button>
+        <Button onClick={rentBook}>대여하기</Button>
         <Button onClick={close}>다음에</Button>
       </Footer>
     </>
