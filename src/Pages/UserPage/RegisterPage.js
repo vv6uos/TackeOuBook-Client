@@ -53,14 +53,15 @@ function RegisterPage() {
   const { id, password, chkPassword, name, email, address, phoneNumber } =
     inputs;
   //유효성검사를 위한 CheckValid 인스턴스 생성
+  const checkValid = new CheckValid(inputs, setInputs);
   //이벤트함수: innput이 onBlur상태일 때 유효성검사 실행
   const onBlur = (e) => {
-    CheckValid.onBlur(e, inputs, setInputs);
-    CheckValid.confirmPw(inputs, setInputs);
+    checkValid.onBlur(e);
+    checkValid.confirmPw();
   };
   //이벤트함수: 변화하는 value값에 따른 유효성 검사 실행
   const onChange = (e) => {
-    CheckValid.onChange(e, inputs, setInputs);
+    checkValid.onChange(e);
   };
 
   //이벤트함수 : 버튼 활성화 / 비활성화를 결정함
