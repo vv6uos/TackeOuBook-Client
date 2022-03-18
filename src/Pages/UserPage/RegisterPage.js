@@ -7,7 +7,7 @@ import axios from "axios";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
 import { InputWithLabel, Button } from "components/index";
-import { chkNull, chkLetter, matchPw } from "./registerValid/index.js";
+import CheckValid from "./CheckValid.js";
 
 //-----메인
 function RegisterPage() {
@@ -52,51 +52,17 @@ function RegisterPage() {
   //변수: inputs의  key와 value를 각각 저장
   const { id, password, chkPassword, name, email, address, phoneNumber } =
     inputs;
-
-  //함수: 요소의 value가 유효하지 않은 상태를 Inputs에 저장하는 함수
-  const setInv = (name, value, $errMessage) => {
-    //name과 동일한 inputs의 key를 가진 요소를 찾아 valid값을 false로 바꾸고 오류메세지 저장
-    setInputs({
-      ...inputs,
-      [name]: {
-        value,
-        valid: false,
-        errMessage: $errMessage,
-      },
-    });
-  };
-  //함수 : 요소의 value가 유효하다는 상태를 Inputs에 저장하는 함수
-  const setValid = (name, value) => {
-    //name과 동일한 inputs의 key를 가진 요소를 찾아 valid값을 true, 오류메세지 제거
-    setInputs({
-      ...inputs,
-      [name]: {
-        value,
-        valid: true,
-        errMessage: "",
-      },
-    });
-  };
-
+  //유효성검사를 위한 CheckValid 인스턴스 생성
   //이벤트함수: innput이 onBlur상태일 때 유효성검사 실행
   const onBlur = (e) => {
-    //공백을 체크하는 함수 실행
-    chkNull(e, setInv, setValid);
-    //비밀번호 검증 함수 실행 (*확인이 마친 후 비밀번호 변경했을 시 오류 방지)
-    if (e.target.name === "password" || e.target.name === "chkPassword") {
-      matchPw(password.value, chkPassword.value, setInv, setValid);
-    }
+    CheckValid.onBlur(e, inputs, setInputs);
+    CheckValid.confirmPw(inputs, setInputs);
   };
   //이벤트함수: 변화하는 value값에 따른 유효성 검사 실행
   const onChange = (e) => {
-    const { name, value } = e.target;
-    //비밀번호 확인일때는 비밀번호 검증을 , 그외는 양식검사 실행
-    if (name === "chkPassword") {
-      matchPw(password.value, value, setInv, setValid);
-    } else {
-      chkLetter(e, setInv, setValid);
-    }
+    CheckValid.onChange(e, inputs, setInputs);
   };
+
   //이벤트함수 : 버튼 활성화 / 비활성화를 결정함
   const onDisabled = () => {
     //  inputs의 모든 valid가 true일 경우에만 가입하기 버튼이 활성화
