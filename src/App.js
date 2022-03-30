@@ -47,6 +47,7 @@ function App() {
         console.log("/userSession , Axios ERROR");
       });
   }, []);
+  console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
 
   return (
     <>
