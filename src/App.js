@@ -1,3 +1,6 @@
+// 개인프로젝트,이송은
+// 도서 대여 플랫폼 제작
+
 //-----import 외부 소스
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";

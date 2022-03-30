@@ -33,8 +33,8 @@ function Books() {
         {books.map((book) => {
           return (
             <Card key={book.id}>
+              {book.onRent && <RentBlur />}
               <MyLink to={`/books/${book.id}`}>
-                {book.onRent && <RentBlur />}
                 <img
                   className="bookCover"
                   src={`${book.imgURL}`}
@@ -99,7 +99,7 @@ const RentBlur = styled.div`
   position: absolute;
   width: 23%;
   max-width: 276px;
-  height: 29rem;
+  height: 28rem;
   opacity: 0.7;
   z-index: 2;
   background-color: ${colors.gray};

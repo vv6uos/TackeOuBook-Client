@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { myCSS, myTheme } from "style";
 import { ChangeSubscribe, SubscribeInfo } from "./components/index.js";
 
-//-----메인 회원의 구독정보를 제공하는 컴포넌트
+//-----메인 : 회원의 구독정보를 제공하는 컴포넌트
 function MySubscribe({ user }) {
   return (
     <Wrapper>
