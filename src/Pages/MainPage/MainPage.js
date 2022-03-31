@@ -8,7 +8,7 @@ import { myCSS } from "style";
 function MainPage() {
   return (
     <Wrapper>
-      <Banner src="/images/banner-003.png" alt="배너" />
+      <Banner src="https://i.imgur.com/nTpq5NF.png" alt="배너" />
       <BestSellers />
       <Books />
     </Wrapper>
