@@ -1,4 +1,4 @@
 export const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://takeoutbook-server.herokuapp.com"
+    ? "http://sv.takeoutbook.kr"
     : "http://localhost:8080";
