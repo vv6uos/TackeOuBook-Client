@@ -20,6 +20,7 @@ import {
   Header,
   MyPage,
 } from "Pages/index";
+import { logout } from "function";
 
 //-----메인
 function App() {
@@ -46,15 +47,16 @@ function App() {
       .catch((err) => {
         console.log("/userSession , Axios ERROR");
       });
+    //브라우저 창이 닫히면 로그아웃처리
+    window.addEventListener("unload", logout);
   }, []);
-  console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
 
   return (
     <>
       <GlobalStyle />
       <Wrapper>
         <Header user={user} />
-        <Body>
+        <Body onU="closeApp()">
           <Routes>
             <Route path={"/"} element={<MainPage />} />
             <Route path={"/upload"} element={<UploadPage />} />
