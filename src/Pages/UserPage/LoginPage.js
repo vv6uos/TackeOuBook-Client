@@ -40,7 +40,11 @@ function LoginPage() {
         //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
         const user = result.data.user;
         //유저 데이터에 담긴 검증 결과에 따라 다른 alert메서드 사용
-        console.log("느림현상파악중 client session 받아오기 힘들다", user);
+        console.log(
+          "느림현상파악중 client session 받아오기 힘들다",
+          user,
+          "->로컬환경테스트 OK"
+        );
         if (user.isLogin) {
           alert(`${user.name}님, 안녕하세요`);
           console.log("내용은 받아졌으나 리로드의 문제였던가.?");
