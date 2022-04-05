@@ -7,17 +7,29 @@ function TestPage() {
   return (
     <>
       <ButtonDisabledTestArea />
-      <Button onClick={testSession}>세션만들기</Button>
+      <Button onClick={createSession}>세션만들기</Button>
+      <Button onClick={updateSession}>세션업데이트</Button>
       <Button onClick={loadTestSession}>세션가져오기</Button>
       <Button onClick={findUserTest}>유저찾기</Button>
     </>
   );
 }
 
-const testSession = () => {
+const createSession = () => {
   console.log("클릭완료");
   axios
     .get(`${API_URL}/test/createSession`, { withCredentials: true })
+    .then((result) => {
+      console.log("SESSION TEST 응답결과", result.data);
+    })
+    .catch((err) => {
+      console.log("SESSION TEST AXIOS ERROR");
+    });
+};
+const updateSession = () => {
+  console.log("업데이트클릭완료");
+  axios
+    .get(`${API_URL}/test/updateSession`, { withCredentials: true })
     .then((result) => {
       console.log("SESSION TEST 응답결과", result.data);
     })
