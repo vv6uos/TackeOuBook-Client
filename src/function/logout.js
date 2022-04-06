@@ -9,12 +9,12 @@ function logout() {
   axios
     .get(`${API_URL}/userSession/delete`, { withCredentials: true })
     .then((result) => {
-      console.log("AXIOS LOGOUT: SUCCESS");
-      console.log("로그아웃....", result.data);
-      window.location.reload(true);
+      const response = result.data;
+      console.log("USER_SESSION/DELETE RESPONSE : ", response);
+      response.answer ? window.location.reload(true) : alert(response.msg);
     })
     .catch((err) => {
-      console.log("AXIOS LOGOUT: ERROR");
+      console.log(" **FAIL : USER_SESSION/DELETE REQUEST");
     });
 }
 
