@@ -36,16 +36,22 @@ function App() {
     axios
       .get(`${API_URL}/userSession`, { withCredentials: true })
       .then((result) => {
-        const user = result.data.user;
-        setUser({
-          isLogin: user.isLogin,
-          id: user.id,
-          name: user.name,
-          isSubscriber: user.isSubscriber,
-        });
+        const response = result.data;
+        console.log("USER_SESSION RESPONSE : ", response);
+        if (response.answer) {
+          const user = response.user;
+          setUser({
+            isLogin: user.isLogin,
+            id: user.id,
+            name: user.name,
+            isSubscriber: user.isSubscriber,
+          });
+        } else {
+          console.log(response.msg);
+        }
       })
       .catch((err) => {
-        console.log("/userSession , Axios ERROR");
+        console.log(" **FAIL : USER_SESSION REQUEST");
       });
     //브라우저 창이 닫히면 로그아웃처리
     window.addEventListener("unload", logout);
