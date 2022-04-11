@@ -39,7 +39,7 @@ function LoginPage() {
       .then((result) => {
         //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
         const response = result.data;
-        console.log("USER SESSION RESPONSE : ", response);
+        console.log("USER_SESSION/CREATE RESPONSE : ", response);
         if (response.answer) {
           window.location.replace("/");
         } else {
