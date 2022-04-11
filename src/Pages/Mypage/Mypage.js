@@ -8,19 +8,23 @@ import { MySubscribe, MyInfos, MyRental } from "./components/index";
 
 //-----메인 회원 정보를 제공하는 컴포넌트의 기본 틀
 function MyPage({ user }) {
+  const { id } = user;
   return (
     <Wrapper>
       <Nav>
         <NavTitle>마이페이지</NavTitle>
-        <NavItem to="/mypage/myinfo">내정보</NavItem>
-        <NavItem to="/mypage/mysubscribe">구독현황</NavItem>
-        <NavItem to="/mypage/myrental">대여현황</NavItem>
+        <NavItem to={`/mypage/${id}/myinfo`}>내정보</NavItem>
+        <NavItem to={`/mypage/${id}/mysubscribe`}>구독현황</NavItem>
+        <NavItem to={`/mypage/${id}/myrental`}>대여현황</NavItem>
       </Nav>
       <Container>
         <Routes>
-          <Route path={"/myinfo"} element={<MyInfos />} />
-          <Route path={"/mysubscribe"} element={<MySubscribe user={user} />} />
-          <Route path={"/myrental"} element={<MyRental />} />
+          <Route path={"/:id/myinfo"} element={<MyInfos />} />
+          <Route
+            path={"/:id/mysubscribe"}
+            element={<MySubscribe user={user} />}
+          />
+          <Route path={"/:id/myrental"} element={<MyRental />} />
         </Routes>
       </Container>
     </Wrapper>
