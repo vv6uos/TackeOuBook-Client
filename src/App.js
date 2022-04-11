@@ -91,11 +91,11 @@ const Wrapper = styled.div`
 `;
 
 const Footer = styled.footer`
-  margin-top: 3rem;
   height: 6rem;
   color: white;
   background-color: ${colors.d1};
 `;
 const Body = styled.div`
   min-height: 90vh;
+  font-size: 1em;
 `;

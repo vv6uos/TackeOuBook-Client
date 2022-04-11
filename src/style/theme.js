@@ -33,7 +33,6 @@ const fontStyles = {
   body: css`
     font-family: ${fonts.m};
     color: ${colors.d1};
-    font-size: 1rem;
   `,
   mini: css`
     font-family: ${fonts.s};

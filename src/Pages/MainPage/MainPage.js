@@ -19,6 +19,7 @@ export default MainPage;
 //-----스타일
 
 const Wrapper = styled.div`
+  padding-bottom: 2rem;
   ${myCSS.flexColumn}
 `;
 const Banner = styled.img`
