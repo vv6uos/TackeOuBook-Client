@@ -19,7 +19,7 @@ function MemberNav({ user, setPop }) {
   const onClickSubscribeBtn = () => {
     if (user.isSubscriber) {
       setPop(false);
-      navigate("/mypage/mysubscribe");
+      navigate(`/mypage/${user.id}/mysubscribe`);
     } else {
       setPop(true);
     }
@@ -28,12 +28,12 @@ function MemberNav({ user, setPop }) {
   return (
     <Nav>
       <LeftContainer>
-        <BookContainer />
+        <BookContainer user={user} />
         <User>{`${user.name}님`}</User>
         <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
       <RightContainer>
-        <NavButton moveTo="/mypage/mysubscribe">마이페이지</NavButton>
+        <NavButton moveTo="/mypage/:id/mysubscribe">마이페이지</NavButton>
         <NavButton onClick={onLogout}>로그아웃</NavButton>
       </RightContainer>
     </Nav>
