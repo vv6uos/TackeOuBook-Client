@@ -28,7 +28,7 @@ function MemberNav({ user, setPop }) {
   return (
     <Nav>
       <LeftContainer>
-        <BookContainer user={user} />
+        <BookContainer userId={user.id} />
         <User>{`${user.name}님`}</User>
         <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
