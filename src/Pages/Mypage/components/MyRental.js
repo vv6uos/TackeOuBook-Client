@@ -3,10 +3,15 @@ import styled, { css } from "styled-components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 //-----import 내부
 import { Button } from "components";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
+
+dayjs.extend(relativeTime);
 
 //----- 메인: 회원의 대여현황 컴포넌트
 function MyRental() {
@@ -19,6 +24,9 @@ function MyRental() {
         const response = result.data;
         console.log("MEMBER/BOOKS RESPONSE : ", response);
         if (response.answer) {
+          console.log(response.result);
+          const userBooks = response.result;
+          setMyBooks(userBooks);
         } else {
           console.log(response.msg);
         }
@@ -27,35 +35,44 @@ function MyRental() {
         console.log(" **FAIL : MEMBER/BOOKS REQUEST");
         alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
       });
-  }, []);
+  }, [id]);
+
   return (
     <Wrapper>
       <Container>
         <Subject>대여현황</Subject>
         <BookShelf>
-          <Card>
-            <div className="rentDate">2021.03.12 대여</div>
-            <BookInfoBox>
-              <BookImg
-                src="https://image.aladin.co.kr/product/28596/70/cover/k832835755_1.jpg"
-                alt="대여 책 사진"
-              />
-              <div>
-                프로그래머의 뇌- 훌륭한 프로그래머가 알아야 할 인지과학의 모든
-                것{" "}
-              </div>
-            </BookInfoBox>
-            <ReturnBox>
-              <div className="returnAt">반납예정 2021.03.19</div>
-              <ReturnButton
-                onClick={() => {
-                  alert("반납하시겠습니까?");
-                }}
-              >
-                반납
-              </ReturnButton>
-            </ReturnBox>
-          </Card>
+          {myBooks.map((mybook) => {
+            console.log("기본형식:", mybook.rentAt);
+            var dayRentAt = dayjs(mybook.rentBy).format("YYYY-MM-DD");
+            var fromNowDate = dayjs(dayRentAt).fromNow();
+            var now = dayjs();
+            var daysFromNow = dayjs(mybook.rentBy).diff(now, "day");
+            console.log(daysFromNow);
+            var bookTitle = mybook.Book.name.split("-");
+            console.log(bookTitle[0]);
+            return (
+              <Card>
+                <div className="rentDate">
+                  {dayjs(mybook.rentAt).format("YYYY-MM-DD")} 대여
+                </div>
+                <BookInfoBox>
+                  <BookImg src={mybook.Book.imgURL} alt="대여 책 사진" />
+                  <div className="title">{bookTitle[0]}</div>
+                </BookInfoBox>
+                <ReturnBox>
+                  <div className="returnAt">반납 기한 {daysFromNow}일전</div>
+                  <ReturnButton
+                    onClick={() => {
+                      alert("반납하시겠습니까?");
+                    }}
+                  >
+                    반납
+                  </ReturnButton>
+                </ReturnBox>
+              </Card>
+            );
+          })}
         </BookShelf>
       </Container>
       <Container>
@@ -67,7 +84,7 @@ function MyRental() {
                 src="https://image.aladin.co.kr/product/28596/70/cover/k832835755_1.jpg"
                 alt="대여 책 사진"
               />
-              <div>
+              <div className="title">
                 프로그래머의 뇌- 훌륭한 프로그래머가 알아야 할 인지과학의 모든
                 것{" "}
               </div>
@@ -106,7 +123,7 @@ const BookShelf = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  font-size: 0.7em;
+  font-size: 0.8em;
   @media screen and (max-width: 768px) {
     font-size: 1em;
   }
@@ -114,10 +131,16 @@ const BookShelf = styled.div`
 
 const Card = styled.div`
   ${fontStyles.body};
-  width: 15em;
-  height: auto;
+
+  margin-left: 1rem;
+
+  width: 12rem;
+  height: 25em;
   .rentDate {
-    font-size: 1.2em;
+    font-size: 1em;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: 1rem;
   }
 `;
 
@@ -126,10 +149,16 @@ const BookInfoBox = styled.div`
   background-color: white;
   border: 1px solid gray;
   padding: 0.5em;
+  .title {
+    height: 4em;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0 0 0.3rem;
+    border-top: 1px solid gray;
+  }
 `;
 const BookImg = styled.img`
   max-width: 90%;
-  height: auto;
+  height: 12rem;
   display: block;
   margin: 0px auto;
 `;
@@ -140,8 +169,9 @@ const ReturnBox = styled.div`
   justify-content: space-between;
   margin-top: 0.2em;
   .returnAt {
+    margin-top: 0.2em;
     color: orange;
-    font-size: 1.1em;
+    font-size: 1em;
   }
 `;
 
