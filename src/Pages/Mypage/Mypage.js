@@ -4,27 +4,24 @@ import { Routes, Route } from "react-router-dom";
 //-----import 내부
 import { myCSS, myTheme } from "style/index";
 import { MyLink } from "components";
-import { MySubscribe, MyInfos, MyRental } from "./components/index";
+import { MySubscribe, MyInfo, MyBooks } from "./components/index";
 
 //-----메인 회원 정보를 제공하는 컴포넌트의 기본 틀
 function MyPage({ user }) {
-  const { id } = user;
+  const userId = user.id;
   return (
     <Wrapper>
       <Nav>
         <NavTitle>마이페이지</NavTitle>
-        <NavItem to={`/mypage/${id}/myinfo`}>내정보</NavItem>
-        <NavItem to={`/mypage/${id}/mysubscribe`}>구독현황</NavItem>
-        <NavItem to={`/mypage/${id}/myrental`}>대여현황</NavItem>
+        <NavItem to={`/mypage/info`}>내정보</NavItem>
+        <NavItem to={`/mypage/subscribe`}>구독현황</NavItem>
+        <NavItem to={`/mypage/books`}>대여현황</NavItem>
       </Nav>
       <Container>
         <Routes>
-          <Route path={"/:id/myinfo"} element={<MyInfos />} />
-          <Route
-            path={"/:id/mysubscribe"}
-            element={<MySubscribe user={user} />}
-          />
-          <Route path={"/:id/myrental"} element={<MyRental />} />
+          <Route path={"/info"} element={<MyInfo user={user} />} />
+          <Route path={"/subscribe"} element={<MySubscribe user={user} />} />
+          <Route path={"/books"} element={<MyBooks user={user} />} />
         </Routes>
       </Container>
     </Wrapper>

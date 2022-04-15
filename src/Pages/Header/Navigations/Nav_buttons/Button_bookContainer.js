@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { MyLink } from "components";
 
 //-----메인 네비게이션의 책장아이콘: 링크하면 회원의 대여현황으로 이동
-function BookContainer({ userId }) {
+function BookContainer() {
   return (
-    <MyLink to={`/mypage/${userId}/myrental`}>
+    <MyLink to={`/mypage/books`}>
       <Img src="https://i.imgur.com/YILs4kW.jpg" />
     </MyLink>
   );

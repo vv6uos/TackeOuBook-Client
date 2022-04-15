@@ -11,7 +11,7 @@ function MemberNav({ user, setPop }) {
   const navigate = useNavigate();
   //이벤트함수: 로그아웃 버튼 클릭 시 , 실행
 
-  const onLogout = () => {
+  const onClickLogoutBtn = () => {
     //서버에서 유저세션을 삭제
     logout();
   };
@@ -19,7 +19,7 @@ function MemberNav({ user, setPop }) {
   const onClickSubscribeBtn = () => {
     if (user.isSubscriber) {
       setPop(false);
-      navigate(`/mypage/${user.id}/mysubscribe`);
+      navigate(`/mypage/subscribe`);
     } else {
       setPop(true);
     }
@@ -33,8 +33,8 @@ function MemberNav({ user, setPop }) {
         <SubscribeButton onClick={onClickSubscribeBtn} />
       </LeftContainer>
       <RightContainer>
-        <NavButton moveTo="/mypage/:id/mysubscribe">마이페이지</NavButton>
-        <NavButton onClick={onLogout}>로그아웃</NavButton>
+        <NavButton moveTo="/mypage/subscribe">마이페이지</NavButton>
+        <NavButton onClick={onClickLogoutBtn}>로그아웃</NavButton>
       </RightContainer>
     </Nav>
   );

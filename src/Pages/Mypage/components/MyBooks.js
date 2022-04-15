@@ -1,28 +1,26 @@
 //-----import 외부
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 //-----import 내부
-import { Button } from "components";
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
 
 dayjs.extend(relativeTime);
 
 //----- 메인: 회원의 대여현황 컴포넌트
-function MyRental() {
+function MyBooks({ user }) {
+  const userId = user.id;
   const [myBooks, setMyBooks] = useState([]);
-  const { id } = useParams("");
   useEffect(() => {
     axios
-      .get(`${API_URL}/member/${id}/books`)
+      .get(`${API_URL}/userBooks/read/user/${userId}`)
       .then((result) => {
         const response = result.data;
-        console.log("MEMBER/BOOKS RESPONSE : ", response);
+        console.log("USERBOOKS/READ RESPONSE : ", response);
         if (response.answer) {
           console.log(response.result);
           const userBooks = response.result;
@@ -32,32 +30,30 @@ function MyRental() {
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : MEMBER/BOOKS REQUEST");
+        console.log(" **FAIL : USERBOOKS/READ REQUEST");
         alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
       });
-  }, [id]);
+  }, [userId]);
 
   return (
     <Wrapper>
       <Container>
         <Subject>대여현황</Subject>
         <BookShelf>
-          {myBooks.map((mybook) => {
-            console.log("기본형식:", mybook.rentAt);
-            var dayRentAt = dayjs(mybook.rentBy).format("YYYY-MM-DD");
-            var fromNowDate = dayjs(dayRentAt).fromNow();
+          {myBooks.map((book) => {
+            console.log("기본형식:", book.rentAt);
             var now = dayjs();
-            var daysFromNow = dayjs(mybook.rentBy).diff(now, "day");
+            var daysFromNow = dayjs(book.rentBy).diff(now, "day");
             console.log(daysFromNow);
-            var bookTitle = mybook.Book.name.split("-");
+            var bookTitle = book.Book.name.split("-");
             console.log(bookTitle[0]);
             return (
-              <Card>
+              <Card key={book.rental_id}>
                 <div className="rentDate">
-                  {dayjs(mybook.rentAt).format("YYYY-MM-DD")} 대여
+                  {dayjs(book.rentAt).format("YYYY-MM-DD")} 대여
                 </div>
                 <BookInfoBox>
-                  <BookImg src={mybook.Book.imgURL} alt="대여 책 사진" />
+                  <BookImg src={book.Book.imgURL} alt="대여 책 사진" />
                   <div className="title">{bookTitle[0]}</div>
                 </BookInfoBox>
                 <ReturnBox>
@@ -97,10 +93,10 @@ function MyRental() {
   );
 }
 
-export default MyRental;
+export default MyBooks;
 
 //----- 스타일
-const { flexColumn, center } = myCSS;
+const { flexColumn } = myCSS;
 const { fontStyles, colors } = myTheme;
 
 const Wrapper = styled.div`
