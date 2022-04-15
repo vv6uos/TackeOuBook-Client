@@ -9,26 +9,31 @@ import { Button } from "components";
 
 //-----메인 구독자에게 대여의사를 묻고 책의대여상태를 변경 , userBooks데이터 생성
 function RentPop(props) {
-  const { close, id, user } = props;
+  const { close, user, id } = props;
+  const bookId = id;
+  const userId = user.id;
 
-  //이벤트함수 : 대여하기 버튼 클릭시 책의 대여상태 변경되고 userBooks 데이터가 추가됨
-  const rentBook = () => {
-    console.log(id);
+  //이벤트함수 : 대여하기 버튼 클릭시 책의 대여상태 변경, userBooks 데이터가 추가됨
+  const onClickRent = () => {
     axios
-      .post(`${API_URL}/books/${id}/rent`, { memberId: user.id })
+      .get(`${API_URL}/userBooks/create?userId=${userId}&bookId=${bookId}`)
       .then((result) => {
-        if (result.data) {
+        const response = result.data;
+        console.log("USERBOOKS/CREATE RESPONSE : ", response);
+        if (response.answer) {
           alert(
             "대여하셨습니다. 자세한 정보는 마이페이지>대여현황에서 확인해주세요."
           );
           close();
           window.location.reload();
-        } else alert("관리자에게 문의 부탁드립니다.");
+        } else {
+          console.log(response.msg);
+        }
       })
       .catch((err) => {
-        console.log("책 대여 AXIOS 실패", err);
+        console.log(" **FAIL : USERBOOKS/CREATE REQUEST");
+        alert("책 대여 서버관리자에게 문의 부탁드립니다");
       });
-    //추가로 userBooks데이터 생성하기
   };
 
   //-----메인 인덱스
@@ -36,7 +41,7 @@ function RentPop(props) {
     <>
       <Main>이 책을 대여하시겠습니까?</Main>
       <Footer>
-        <Button onClick={rentBook}>대여하기</Button>
+        <Button onClick={onClickRent}>대여하기</Button>
         <Button onClick={close}>다음에</Button>
       </Footer>
     </>
