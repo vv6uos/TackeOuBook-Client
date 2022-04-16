@@ -30,10 +30,30 @@ function MyBooks({ user }) {
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/READ REQUEST");
+        console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
         alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
       });
   }, [userId]);
+
+  const onClickReturnBtn = (userBookId, bookId) => {
+    axios
+      .get(
+        `${API_URL}/userBooks/update?userBookId=${userBookId}&bookId=${bookId}`
+      )
+      .then((result) => {
+        const response = result.data;
+        console.log("USERBOOKS/UPDATE RESPONSE : ", response);
+        if (response.answer) {
+          console.log(response.result);
+        } else {
+          console.log(response.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
+        alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
+      });
+  };
 
   return (
     <Wrapper>
@@ -41,12 +61,9 @@ function MyBooks({ user }) {
         <Subject>대여현황</Subject>
         <BookShelf>
           {myBooks.map((book) => {
-            console.log("기본형식:", book.rentAt);
-            var now = dayjs();
-            var daysFromNow = dayjs(book.rentBy).diff(now, "day");
-            console.log(daysFromNow);
-            var bookTitle = book.Book.name.split("-");
-            console.log(bookTitle[0]);
+            const now = dayjs();
+            const daysFromNow = dayjs(book.rentBy).diff(now, "day");
+            const bookTitle = book.Book.name.split("-");
             return (
               <Card key={book.rental_id}>
                 <div className="rentDate">
@@ -60,7 +77,7 @@ function MyBooks({ user }) {
                   <div className="returnAt">반납 기한 {daysFromNow}일전</div>
                   <ReturnButton
                     onClick={() => {
-                      alert("반납하시겠습니까?");
+                      onClickReturnBtn(book.rental_id, book.fk_book_id);
                     }}
                   >
                     반납
