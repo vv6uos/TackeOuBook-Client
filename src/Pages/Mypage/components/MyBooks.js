@@ -4,36 +4,77 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
 //-----import 내부
 import { myCSS, myTheme } from "style/index";
 import { API_URL } from "config/constants";
-
 dayjs.extend(relativeTime);
 
 //----- 메인: 회원의 대여현황 컴포넌트
 function MyBooks({ user }) {
-  const userId = user.id;
-  const [myBooks, setMyBooks] = useState([]);
+  const [myBooksOnRent, setMyBooksOnRent] = useState([]);
+  const [myReturnedBooks, setMyReturnedBooks] = useState([]);
+
   useEffect(() => {
+    //대여중인 책들 서버에 요청
     axios
-      .get(`${API_URL}/userBooks/read/user/${userId}`)
+      .get(`${API_URL}/userBooks/read/user/${user.id}/onRent`)
       .then((result) => {
         const response = result.data;
-        console.log("USERBOOKS/READ RESPONSE : ", response);
+        console.log("USERBOOKS/READ/OnRent RESPONSE : ", response);
         if (response.answer) {
-          console.log(response.result);
           const userBooks = response.result;
-          setMyBooks(userBooks);
+          const userBooksOnRent = [];
+          userBooks.map((userBook) => {
+            const setBookOnRent = {
+              rentId: userBook.rental_id,
+              rentAt: formatDate(userBook.rentAt),
+              rentBy: formatDate(userBook.rentBy),
+              bookId: userBook.fk_book_id,
+              title: firstTitle(userBook.Book.name),
+              imgURL: userBook.Book.imgURL,
+            };
+            userBooksOnRent.push(setBookOnRent);
+          });
+          setMyBooksOnRent(userBooksOnRent);
+          console.log("SET MYBOOKS _ON RENT : ", myBooksOnRent);
         } else {
           console.log(response.msg);
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
-        alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
+        console.log(" **FAIL : USERBOOKS/UPDATE/OnRent REQUEST");
       });
-  }, [userId]);
+
+    //반납한 책들 서버에 요청
+    axios
+      .get(`${API_URL}/userBooks/read/user/${user.id}/returned`)
+      .then((result) => {
+        const response = result.data;
+        console.log("USERBOOKS/READ/returned RESPONSE : ", response);
+        if (response.answer) {
+          const userBooks = response.result;
+          const userRetunedBooks = [];
+          userBooks.map((userBook) => {
+            const setReturnedBook = {
+              rentId: userBook.rental_id,
+              rentAt: formatDate(userBook.rentAt),
+              returnAt: formatDate(userBook.returnAt),
+              bookId: userBook.fk_book_id,
+              title: firstTitle(userBook.Book.name),
+              imgURL: userBook.Book.imgURL,
+            };
+            userRetunedBooks.push(setReturnedBook);
+          });
+          setMyReturnedBooks(userRetunedBooks);
+          console.log("SET MYBOOKS _returned : ", myReturnedBooks);
+        } else {
+          console.log(response.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(" **FAIL : USERBOOKS/UPDATE/returned REQUEST");
+      });
+  }, [user.id]);
 
   const onClickReturnBtn = (userBookId, bookId) => {
     axios
@@ -45,6 +86,8 @@ function MyBooks({ user }) {
         console.log("USERBOOKS/UPDATE RESPONSE : ", response);
         if (response.answer) {
           console.log(response.result);
+          alert("반납되었습니다.");
+          window.location.reload();
         } else {
           console.log(response.msg);
         }
@@ -54,30 +97,40 @@ function MyBooks({ user }) {
         alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
       });
   };
+  const formatDate = (date) => {
+    return dayjs(date).format("YYYY-MM-DD");
+  };
+  const firstTitle = (title) => {
+    const Titles = title.split("-");
+    return Titles[0];
+  };
 
   return (
     <Wrapper>
       <Container>
-        <Subject>대여현황</Subject>
+        <Subject>대여한 도서</Subject>
         <BookShelf>
-          {myBooks.map((book) => {
+          {myBooksOnRent.map((myBookOnRent) => {
             const now = dayjs();
-            const daysFromNow = dayjs(book.rentBy).diff(now, "day");
-            const bookTitle = book.Book.name.split("-");
+            const daysFromNow = dayjs(myBookOnRent.rentBy).diff(now, "day");
+
             return (
-              <Card key={book.rental_id}>
+              <Card key={myBookOnRent.rentId}>
                 <div className="rentDate">
-                  {dayjs(book.rentAt).format("YYYY-MM-DD")} 대여
+                  {formatDate(myBookOnRent.rentAt)} 대여
                 </div>
                 <BookInfoBox>
-                  <BookImg src={book.Book.imgURL} alt="대여 책 사진" />
-                  <div className="title">{bookTitle[0]}</div>
+                  <BookImg src={myBookOnRent.imgURL} alt="대여 책 사진" />
+                  <div className="title">{myBookOnRent.title}</div>
                 </BookInfoBox>
                 <ReturnBox>
                   <div className="returnAt">반납 기한 {daysFromNow}일전</div>
                   <ReturnButton
                     onClick={() => {
-                      onClickReturnBtn(book.rental_id, book.fk_book_id);
+                      onClickReturnBtn(
+                        myBookOnRent.rentId,
+                        myBookOnRent.bookId
+                      );
                     }}
                   >
                     반납
@@ -89,21 +142,22 @@ function MyBooks({ user }) {
         </BookShelf>
       </Container>
       <Container>
-        <Subject>지난대여</Subject>
+        <Subject>읽은 도서</Subject>
         <BookShelf>
-          <Card>
-            <BookInfoBox>
-              <BookImg
-                src="https://image.aladin.co.kr/product/28596/70/cover/k832835755_1.jpg"
-                alt="대여 책 사진"
-              />
-              <div className="title">
-                프로그래머의 뇌- 훌륭한 프로그래머가 알아야 할 인지과학의 모든
-                것{" "}
-              </div>
-            </BookInfoBox>
-            <div className="rentDate">2021.03.12 ~ 2021.03.19</div>
-          </Card>
+          {myReturnedBooks.map((returnedBook) => {
+            return (
+              <Card key={returnedBook.rentId}>
+                <BookInfoBox>
+                  <BookImg src={returnedBook.imgURL} alt="대여 책 사진" />
+                  <div className="title">{returnedBook.title}</div>
+                </BookInfoBox>
+                <div className="rentDate">
+                  {formatDate(returnedBook.rentAt)} ~
+                  {formatDate(returnedBook.returnAt)}
+                </div>
+              </Card>
+            );
+          })}
         </BookShelf>
       </Container>
     </Wrapper>
