@@ -64,14 +64,14 @@ class CheckValid {
       case "name":
         if (isNull()) {
           return this.setInv(name, value, "필수 정보입니다");
-        } else return this.setValid(name, value);
+        }
+        break;
       case "password":
       case "chkPassword":
         if (isNull()) {
           return this.setInv(name, value, "필수 정보입니다");
-        } else {
-          return this.setValid(name, value);
         }
+        break;
 
       default:
         return this.setValid(name, value);
@@ -95,18 +95,20 @@ class CheckValid {
 
     const isAlreadyExistId = () => {
       axios
-        .post(`${API_URL}/register/checkId`, {
+        .post(`${API_URL}/user/read/userId`, {
           user_id: value,
         })
         .then((result) => {
-          if (result.data) {
-            this.setValid(name, value);
+          const response = result.data;
+          console.log("USER/READ/USERID RESPONSE : ", response);
+          if (response.answer) {
+            return this.setInv(name, value, "사용중인 아이디입니다");
           } else {
-            this.setInv(name, value, "사용중인 아이디입니다");
+            return this.setValid(name, value);
           }
         })
         .catch((err) => {
-          console.log("REGISTER isAlreadyExistID POST :ERROR");
+          console.log(" **FAIL : USER/READ/USERID REQUEST");
         });
     };
     switch (name) {
@@ -117,8 +119,9 @@ class CheckValid {
             value,
             "6~15자의 영어 소문자, 숫자 사용해주세요"
           );
+        } else {
+          isAlreadyExistId();
         }
-        isAlreadyExistId();
 
       case "name":
         if (!nameJ.test(value)) {

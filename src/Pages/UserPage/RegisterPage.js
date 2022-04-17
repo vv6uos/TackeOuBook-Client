@@ -85,7 +85,7 @@ function RegisterPage() {
   //이벤트함수 : 가입하기 버튼을 클릭했을 때 서버에 inputs value들을 전송 , 회원가입의 결과를 알려줌
   const onSubmit = (e) => {
     axios
-      .post(`${API_URL}/register`, {
+      .post(`${API_URL}/user/create`, {
         user_id: id.value,
         password: password.value,
         user_name: name.value,
@@ -94,19 +94,20 @@ function RegisterPage() {
         phoneNumber: phoneNumber.value,
       })
       .then((result) => {
-        console.log("REGISTER AXIOS POST : SUCCESS");
-        if (!result.data.result) {
-          console.log(result.data.err);
-          alert("회원가입에 실패했습니다.");
-          window.location.reload();
-        } else {
+        const response = result.data;
+        console.log("USER/CREATE RESPONSE : ", response);
+        if (response.answer) {
+          console.log(response.result);
           alert("회원가입을 축하드립니다.");
           window.location.replace("/login");
+        } else {
+          alert(response.msg);
+          window.location.reload();
         }
       })
       .catch((err) => {
-        console.log("REGISTER AXIOS POST : ERROR");
-        alert("다시 시도 부탁드립니다.");
+        console.log(" **FAIL : USER/CREATE REQUEST");
+        alert("회원가입 관리자에게 문의 부탁드립니다");
       });
   };
 
