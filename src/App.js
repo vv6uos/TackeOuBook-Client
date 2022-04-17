@@ -34,10 +34,10 @@ function App() {
   //함수 : 서버에서 로그인을 확인 후 로그인한 유저정보를 받아옴
   useEffect(() => {
     axios
-      .get(`${API_URL}/userSession`, { withCredentials: true })
+      .get(`${API_URL}/loginSession`, { withCredentials: true })
       .then((result) => {
         const response = result.data;
-        console.log("USER_SESSION RESPONSE : ", response);
+        console.log("LOGIN_SESSION RESPONSE : ", response);
         if (response.answer) {
           const user = response.user;
           setUser({
@@ -51,7 +51,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USER_SESSION REQUEST");
+        console.log(" **FAIL : LOGIN_SESSION REQUEST");
       });
     //브라우저 창이 닫히면 로그아웃처리
     window.addEventListener("unload", logout);

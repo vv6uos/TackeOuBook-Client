@@ -7,14 +7,14 @@ import { API_URL } from "config/constants";
 //서버에서 유저세션 삭제
 function logout() {
   axios
-    .get(`${API_URL}/userSession/delete`, { withCredentials: true })
+    .get(`${API_URL}/loginSession/delete`, { withCredentials: true })
     .then((result) => {
       const response = result.data;
-      console.log("USER_SESSION/DELETE RESPONSE : ", response);
+      console.log("LOGIN_SESSION/DELETE RESPONSE : ", response);
       response.answer ? window.location.reload(true) : alert(response.msg);
     })
     .catch((err) => {
-      console.log(" **FAIL : USER_SESSION/DELETE REQUEST");
+      console.log(" **FAIL : LOGIN_SESSION/DELETE REQUEST");
     });
 }
 

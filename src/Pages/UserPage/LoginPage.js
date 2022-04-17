@@ -29,7 +29,7 @@ function LoginPage() {
   const onSubmit = (e) => {
     axios
       .post(
-        `${API_URL}/userSession/create`,
+        `${API_URL}/loginSession/create`,
         {
           user_id: inputs.id,
           password: inputs.password,
@@ -39,7 +39,7 @@ function LoginPage() {
       .then((result) => {
         //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
         const response = result.data;
-        console.log("USER_SESSION/CREATE RESPONSE : ", response);
+        console.log("LOGIN_SESSION/CREATE RESPONSE : ", response);
         if (response.answer) {
           window.location.replace("/");
         } else {
@@ -47,7 +47,7 @@ function LoginPage() {
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USER_SESSION/CREATE REQUEST");
+        console.log(" **FAIL : LOGIN_SESSION/CREATE REQUEST");
         alert("로그인 서버 관리자에게 문의 부탁드립니다");
       });
   };
