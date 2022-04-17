@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "config/constants";
 
 //-----메인 구독자=>구독취소 , 비구독자=>구독자로 상태가 변경
-function changeSubscribeStatus(memberId, isMemberSubscribe) {
+function changeSubscribeStatus(userId, isMemberSubscribe) {
   //구독취소하려는 회원
   const toCancel = {
     subscribeStatusToChange: false,
@@ -20,21 +20,26 @@ function changeSubscribeStatus(memberId, isMemberSubscribe) {
 
   axios
     .post(
-      `${API_URL}/member/changeSubscribeStatus`,
+      `${API_URL}/user/update/subscribe`,
       {
-        memberId,
+        userId,
         subscribeStatusToChange: member.subscribeStatusToChange,
       },
       { withCredentials: true }
     )
     .then((result) => {
-      console.log("구독정보 변경 성공", result.data);
-      alert(member.alertMsg);
-      window.location.reload(true);
+       const response = result.data;
+       console.log("USER/UPDATE:subscribe RESPONSE : ", response);
+          if (response.answer) {
+            alert(member.alertMsg);
+            window.location.reload();
+          } else {
+            console.log(response.msg);
+          }
     })
     .catch((err) => {
-      alert("ERROR, 잠시 후에 시도바랍니다");
-      console.log("OnChangeSubscribe, Axios ERROR ");
+     console.log(" **FAIL : USER/UPDATE:subscribe REQUEST");
+     alert("유저 구독 서버 관리자에게 문의 부탁드립니다");
       window.location.reload(true);
     });
 }
