@@ -4,7 +4,6 @@ import axios from "axios";
 import styled from "styled-components";
 
 //-----import 내부
-import { myCSS, myTheme } from "style";
 import { API_URL } from "config/constants";
 
 //----- 메인 회원의 정보수정을 제공하는 컴포넌트

@@ -48,7 +48,6 @@ function LoginPage() {
       })
       .catch((err) => {
         console.log(" **FAIL : LOGIN_SESSION/CREATE REQUEST");
-        alert("로그인 서버 관리자에게 문의 부탁드립니다");
       });
   };
 

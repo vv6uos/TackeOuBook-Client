@@ -23,8 +23,7 @@ function MyBooks({ user }) {
         console.log("USERBOOKS/READ/OnRent RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
-          const userBooksOnRent = [];
-          userBooks.map((userBook) => {
+          const userBooksOnRent = userBooks.map((userBook) => {
             const setBookOnRent = {
               rentId: userBook.rental_id,
               rentAt: formatDate(userBook.rentAt),
@@ -33,10 +32,9 @@ function MyBooks({ user }) {
               title: firstTitle(userBook.Book.name),
               imgURL: userBook.Book.imgURL,
             };
-            userBooksOnRent.push(setBookOnRent);
+            return setBookOnRent;
           });
           setMyBooksOnRent(userBooksOnRent);
-          console.log("SET MYBOOKS _ON RENT : ", myBooksOnRent);
         } else {
           console.log(response.msg);
         }
@@ -53,8 +51,7 @@ function MyBooks({ user }) {
         console.log("USERBOOKS/READ/returned RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
-          const userRetunedBooks = [];
-          userBooks.map((userBook) => {
+          const userRetunedBooks = userBooks.map((userBook) => {
             const setReturnedBook = {
               rentId: userBook.rental_id,
               rentAt: formatDate(userBook.rentAt),
@@ -63,10 +60,9 @@ function MyBooks({ user }) {
               title: firstTitle(userBook.Book.name),
               imgURL: userBook.Book.imgURL,
             };
-            userRetunedBooks.push(setReturnedBook);
+            return setReturnedBook;
           });
           setMyReturnedBooks(userRetunedBooks);
-          console.log("SET MYBOOKS _returned : ", myReturnedBooks);
         } else {
           console.log(response.msg);
         }
@@ -94,7 +90,7 @@ function MyBooks({ user }) {
       })
       .catch((err) => {
         console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
-        alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
+        alert("마이페이지 관리자에게 문의 부탁드립니다");
       });
   };
   const formatDate = (date) => {

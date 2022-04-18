@@ -121,8 +121,8 @@ class CheckValid {
           );
         } else {
           isAlreadyExistId();
+          break;
         }
-
       case "name":
         if (!nameJ.test(value)) {
           return this.setInv(name, value, "2~15자 한글,숫자를 사용해주세요");
