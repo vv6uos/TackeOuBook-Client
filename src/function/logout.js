@@ -11,7 +11,7 @@ function logout() {
     .then((result) => {
       const response = result.data;
       console.log("LOGIN_SESSION/DELETE RESPONSE : ", response);
-      response.answer ? window.location.reload(true) : alert(response.msg);
+      response.answer ? window.location.replace("/") : alert(response.msg);
     })
     .catch((err) => {
       console.log(" **FAIL : LOGIN_SESSION/DELETE REQUEST");
