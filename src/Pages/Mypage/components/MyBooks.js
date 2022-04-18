@@ -13,6 +13,7 @@ dayjs.extend(relativeTime);
 function MyBooks({ user }) {
   const [myBooksOnRent, setMyBooksOnRent] = useState([]);
   const [myReturnedBooks, setMyReturnedBooks] = useState([]);
+  const [loadBooks, setLoadBooks] = useState(false);
 
   useEffect(() => {
     //대여중인 책들 서버에 요청
@@ -23,18 +24,7 @@ function MyBooks({ user }) {
         console.log("USERBOOKS/READ/OnRent RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
-          const userBooksOnRent = userBooks.map((userBook) => {
-            const setBookOnRent = {
-              rentId: userBook.rental_id,
-              rentAt: formatDate(userBook.rentAt),
-              rentBy: formatDate(userBook.rentBy),
-              bookId: userBook.fk_book_id,
-              title: firstTitle(userBook.Book.name),
-              imgURL: userBook.Book.imgURL,
-            };
-            return setBookOnRent;
-          });
-          setMyBooksOnRent(userBooksOnRent);
+          setMyBooksOnRent(newBookList(userBooks));
         } else {
           console.log(response.msg);
         }
@@ -51,18 +41,7 @@ function MyBooks({ user }) {
         console.log("USERBOOKS/READ/returned RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
-          const userRetunedBooks = userBooks.map((userBook) => {
-            const setReturnedBook = {
-              rentId: userBook.rental_id,
-              rentAt: formatDate(userBook.rentAt),
-              returnAt: formatDate(userBook.returnAt),
-              bookId: userBook.fk_book_id,
-              title: firstTitle(userBook.Book.name),
-              imgURL: userBook.Book.imgURL,
-            };
-            return setReturnedBook;
-          });
-          setMyReturnedBooks(userRetunedBooks);
+          setMyReturnedBooks(newBookList(userBooks));
         } else {
           console.log(response.msg);
         }
@@ -70,7 +49,32 @@ function MyBooks({ user }) {
       .catch((err) => {
         console.log(" **FAIL : USERBOOKS/UPDATE/returned REQUEST");
       });
-  }, [user.id]);
+
+    setLoadBooks(false);
+  }, [user.id, loadBooks]);
+
+  const newBookList = (bookList) => {
+    const setBookList = bookList.map((book) => {
+      const setBook = {
+        rentId: book.rental_id,
+        rentAt: formatDate(book.rentAt),
+        rentBy: formatDate(book.rentBy),
+        returnAt: formatDate(book.returnAt),
+        bookId: book.fk_book_id,
+        title: firstTitle(book.Book.name),
+        imgURL: book.Book.imgURL,
+      };
+      return setBook;
+    });
+    return setBookList;
+  };
+  const formatDate = (date) => {
+    return dayjs(date).format("YYYY-MM-DD");
+  };
+  const firstTitle = (title) => {
+    const Titles = title.split("-");
+    return Titles[0];
+  };
 
   const onClickReturnBtn = (userBookId, bookId) => {
     axios
@@ -83,7 +87,6 @@ function MyBooks({ user }) {
         if (response.answer) {
           console.log(response.result);
           alert("반납되었습니다.");
-          window.location.reload();
         } else {
           console.log(response.msg);
         }
@@ -92,13 +95,7 @@ function MyBooks({ user }) {
         console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
         alert("마이페이지 관리자에게 문의 부탁드립니다");
       });
-  };
-  const formatDate = (date) => {
-    return dayjs(date).format("YYYY-MM-DD");
-  };
-  const firstTitle = (title) => {
-    const Titles = title.split("-");
-    return Titles[0];
+    setLoadBooks(true);
   };
 
   return (
