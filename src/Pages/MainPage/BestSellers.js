@@ -20,6 +20,10 @@ function BestSellers() {
       setBestsellers(bestsellers);
     });
   }, []);
+  const firstTitle = (title) => {
+    const Titles = title.split("-");
+    return Titles[0];
+  };
 
   return (
     <Wrapper>
@@ -39,7 +43,7 @@ function BestSellers() {
               <BookImg src={`${bestseller.cover}`} alt="베스트셀러 사진" />
               <BookInfoBox>
                 <div>{bestseller.bestRank}</div>
-                <div>{bestseller.title}</div>
+                <div>{firstTitle(bestseller.title)}</div>
               </BookInfoBox>
             </Card>
           );
@@ -57,7 +61,8 @@ const { fontStyles, colors } = myTheme;
 const Wrapper = styled.div`
   ${myCSS.flexColumn}
   border:1px solid ${colors.gray};
-  min-width: 768px;
+  max-width: 100%;
+  overflow-x: auto;
 `;
 const AladinLogo = styled.img`
   width: 8rem;
@@ -74,7 +79,6 @@ const Title = styled.div`
 `;
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
 `;
 
 const Card = styled.div`

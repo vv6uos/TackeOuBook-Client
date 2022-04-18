@@ -26,6 +26,11 @@ function Books() {
       });
   }, []);
 
+  const firstTitle = (title) => {
+    const Titles = title.split("-");
+    return Titles[0];
+  };
+
   return (
     <Wrapper>
       <Title>대여 가능 도서</Title>
@@ -42,7 +47,7 @@ function Books() {
                 />
                 <InfoBox>
                   <div className="author">| {book.author}</div>
-                  <div>{book.name}</div>
+                  <div>{firstTitle(book.name)}</div>
                 </InfoBox>
               </MyLink>
             </Card>
@@ -79,6 +84,7 @@ const Card = styled.div`
   width: 23%;
   ${fontStyles.body};
   z-index: 1;
+
   @media screen and (max-width: 768px) {
     margin: 2.1%;
     width: 29%;
@@ -96,10 +102,12 @@ const Card = styled.div`
   }
 `;
 const RentBlur = styled.div`
+  margin-right: 1%;
   position: absolute;
-  width: 23%;
-  max-width: 276px;
-  height: 28rem;
+  width: 22.5%;
+  min-width: 132px;
+  height: 23rem;
+
   opacity: 0.7;
   z-index: 2;
   background-color: ${colors.gray};
@@ -115,7 +123,6 @@ const RentBlur = styled.div`
 `;
 
 const InfoBox = styled.div`
-  padding: 5% 2%;
   text-decoration: none;
   border-top: 3px solid ${colors.gray};
   .author {
