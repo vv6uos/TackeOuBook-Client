@@ -10,7 +10,11 @@ import { API_URL } from "config/constants";
 import { InputWithLabel, Button } from "components/index";
 
 //-----메인
-function LoginPage() {
+function LoginPage({ isLogin }) {
+  //로그인이 되어있을 시 로그인 페이지에서 메인페이지로 이동하게 함
+  if (isLogin) {
+    window.location.replace("/");
+  }
   //State : input의 value를 저장하기 위한 state
   const [inputs, setInputs] = useState({
     id: "",
@@ -38,10 +42,10 @@ function LoginPage() {
       )
       .then((result) => {
         //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
+
         const response = result.data;
         console.log("LOGIN_SESSION/CREATE RESPONSE : ", response);
         if (response.answer) {
-          window.location.replace("/");
         } else {
           alert(response.msg);
         }

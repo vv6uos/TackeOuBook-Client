@@ -68,7 +68,10 @@ function App() {
             <Route path={"/upload"} element={<UploadPage />} />
             <Route path={"/books/:id"} element={<DetailPage user={user} />} />
             <Route path={"/test"} element={<TestPage />} />
-            <Route path={"/login"} element={<LoginPage />} />
+            <Route
+              path={"/login"}
+              element={<LoginPage isLogin={user.isLogin} />}
+            />
             <Route path={"/register"} element={<RegisterPage />} />
             <Route path={"/mypage/*"} element={<MyPage user={user} />} />
           </Routes>

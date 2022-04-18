@@ -8,6 +8,9 @@ import { MySubscribe, MyInfo, MyBooks } from "./components/index";
 
 //-----메인 회원 정보를 제공하는 컴포넌트의 기본 틀
 function MyPage({ user }) {
+  if (!user.isLogin) {
+    window.location.replace("/");
+  }
   return (
     <Wrapper>
       <Nav>
