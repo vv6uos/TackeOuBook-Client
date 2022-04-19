@@ -14,7 +14,7 @@ function RentPop(props) {
   const userId = user.id;
 
   //이벤트함수 : 대여하기 버튼 클릭시 책의 대여상태 변경, userBooks 데이터가 추가됨
-  const onClickRent = () => {
+  const onClickRentBtn = () => {
     axios
       .get(`${API_URL}/userBooks/create?userId=${userId}&bookId=${bookId}`)
       .then((result) => {
@@ -41,7 +41,7 @@ function RentPop(props) {
     <>
       <Main>이 책을 대여하시겠습니까?</Main>
       <Footer>
-        <Button onClick={onClickRent}>대여하기</Button>
+        <Button onClick={onClickRentBtn}>대여하기</Button>
         <Button onClick={close}>다음에</Button>
       </Footer>
     </>

@@ -44,8 +44,8 @@ function LoginPage({ isLogin }) {
         //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
 
         const response = result.data;
-        console.log("LOGIN_SESSION/CREATE RESPONSE : ", response);
         if (response.answer) {
+          console.log("LOGIN_SESSION/CREATE RESPONSE : ", response.user);
         } else {
           alert(response.msg);
         }

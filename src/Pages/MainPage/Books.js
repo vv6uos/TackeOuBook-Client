@@ -106,6 +106,7 @@ const RentBlur = styled.div`
   position: absolute;
   width: 22.5%;
   min-width: 132px;
+  max-width: 275px;
   height: 23rem;
 
   opacity: 0.7;
