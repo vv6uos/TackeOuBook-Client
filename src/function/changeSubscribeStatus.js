@@ -28,18 +28,14 @@ function changeSubscribeStatus(userId, isMemberSubscribe) {
       { withCredentials: true }
     )
     .then((result) => {
-       const response = result.data;
-       console.log("USER/UPDATE:subscribe RESPONSE : ", response);
-          if (response.answer) {
-            alert(member.alertMsg);
-            window.location.reload();
-          } else {
-            console.log(response.msg);
-          }
+      const response = result.data;
+      if (response.answer) {
+        alert(member.alertMsg);
+        window.location.reload();
+      }
     })
     .catch((err) => {
-     console.log(" **FAIL : USER/UPDATE:subscribe REQUEST");
-     alert("유저 구독 서버 관리자에게 문의 부탁드립니다");
+      alert("유저 구독 서버 관리자에게 문의 부탁드립니다");
       window.location.reload(true);
     });
 }

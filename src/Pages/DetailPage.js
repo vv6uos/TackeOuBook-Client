@@ -19,15 +19,12 @@ function DetailPage({ user }) {
   const { id } = useParams("");
   //서버 books DB에서 id에 맞는 book정보 받아오는 함수
   useEffect(() => {
-    axios
-      .get(`${API_URL}/books/${id}`)
-      .then((result) => {
-        const book = result.data;
-        setBook(book);
-      })
-      .catch((err) => {
-        console.log("실패 :", err);
-      });
+    axios.get(`${API_URL}/books/${id}`).then((result) => {
+      const response = result.data;
+      if (response.answer) {
+        setBook(response.result);
+      }
+    });
   }, [id]);
   //함수 :  구독자 여부에 따라 구독팝업 또는 대여팝업 생성
   const isPop = () => {

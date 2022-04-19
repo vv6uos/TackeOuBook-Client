@@ -31,24 +31,10 @@ function LoginPage({ isLogin }) {
   };
   //이벤트함수: 로그인 버튼 클릭시 정보가 유효한지 확인하고 userSession을 생성
   const onSubmit = (e) => {
-    axios
-      .get(
-        `${API_URL}/loginSession/create?userId=${inputs.id}&password=${inputs.password}`,
-        { withCredentials: true }
-      )
-      .then((result) => {
-        //유저데이터 : 서버에서 유저 검증을 하고 보낸 결과데이터 담기
-
-        const response = result.data;
-        if (response.answer) {
-          console.log("LOGIN_SESSION/CREATE RESPONSE : ", response.user);
-        } else {
-          alert(response.msg);
-        }
-      })
-      .catch((err) => {
-        console.log(" **FAIL : LOGIN_SESSION/CREATE REQUEST");
-      });
+    axios.get(
+      `${API_URL}/loginSession/create?userId=${inputs.id}&password=${inputs.password}`,
+      { withCredentials: true }
+    );
   };
 
   //-----메인

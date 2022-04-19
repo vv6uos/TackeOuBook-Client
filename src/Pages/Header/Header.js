@@ -27,15 +27,10 @@ function Header({ user }) {
           content={<SubscribePop close={onClosePop} user={user} />}
         />
       )}
-      <MenuBox>
-        <MenuButton moveTo="/upload">업로드</MenuButton>
-        <MenuButton moveTo="/test">테스트</MenuButton>
-        <MenuButton moveTo="/mypage">내정보</MenuButton>
-      </MenuBox>
       <LogoContainer>
         <Logo />
       </LogoContainer>
-
+      {/* 로그인여부에 따라 네비게이션 내용이 바뀜 */}
       {user.isLogin ? (
         <MemberNav setPop={setPop} user={user} />
       ) : (
@@ -55,7 +50,4 @@ const LogoContainer = styled.div`
   width: 100%;
   height: 6rem;
   background-color: ${colors.m1};
-`;
-const MenuBox = styled.div`
-  display: flex;
 `;

@@ -37,22 +37,17 @@ function App() {
       .get(`${API_URL}/loginSession`, { withCredentials: true })
       .then((result) => {
         const response = result.data;
-        console.log("LOGIN_SESSION RESPONSE : ", response);
         if (response.answer) {
-          const user = response.user;
+          const user = response.result;
           setUser({
             isLogin: user.isLogin,
             id: user.id,
             name: user.name,
             isSubscriber: user.isSubscriber,
           });
-        } else {
-          console.log(response.msg);
         }
-      })
-      .catch((err) => {
-        console.log(" **FAIL : LOGIN_SESSION REQUEST");
       });
+
     //브라우저 창이 닫히면 로그아웃처리
     window.addEventListener("unload", logout);
   }, []);

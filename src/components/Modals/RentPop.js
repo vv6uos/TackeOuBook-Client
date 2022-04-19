@@ -19,19 +19,15 @@ function RentPop(props) {
       .get(`${API_URL}/userBooks/create?userId=${userId}&bookId=${bookId}`)
       .then((result) => {
         const response = result.data;
-        console.log("USERBOOKS/CREATE RESPONSE : ", response);
         if (response.answer) {
           alert(
             "대여하셨습니다. 자세한 정보는 마이페이지>대여현황에서 확인해주세요."
           );
           close();
           window.location.reload();
-        } else {
-          console.log(response.msg);
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/CREATE REQUEST");
         alert("책 대여 서버관리자에게 문의 부탁드립니다");
       });
   };

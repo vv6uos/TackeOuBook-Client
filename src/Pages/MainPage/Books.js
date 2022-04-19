@@ -10,20 +10,15 @@ import { MyLink } from "components";
 
 //-----메인
 function Books() {
-  //state
   const [books, setBooks] = useState([]);
-  //함수 서버에서 books 데이터를 받아 state에 저장
+
   useEffect(() => {
-    axios
-      .get(`${API_URL}/books`)
-      .then((result) => {
-        const books = result.data;
-        setBooks(books);
-        console.log("판매도서 데이터 전송 성공 : ", books);
-      })
-      .catch((err) => {
-        console.log("실패 :", err);
-      });
+    axios.get(`${API_URL}/books`).then((result) => {
+      const response = result.data;
+      if (response.answer) {
+        setBooks(response.result);
+      }
+    });
   }, []);
 
   const firstTitle = (title) => {

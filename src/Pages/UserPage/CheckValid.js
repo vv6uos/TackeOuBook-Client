@@ -108,7 +108,7 @@ class CheckValid {
           }
         })
         .catch((err) => {
-          console.log(" **FAIL : USER/READ/USERID REQUEST");
+          alert("회원가입 서버오류 : 잠시 후에 시도 부탁드립니다");
         });
     };
     switch (name) {

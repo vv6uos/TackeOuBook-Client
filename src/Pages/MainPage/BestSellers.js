@@ -16,10 +16,13 @@ function BestSellers() {
   //함수 : 서버에서 besellers를 받아와 state에 저장
   useEffect(() => {
     axios.get(`${API_URL}/bestsellers`).then((result) => {
-      const bestsellers = result.data;
-      setBestsellers(bestsellers);
+      const response = result.data;
+      if (response.answer) {
+        setBestsellers(response.result);
+      }
     });
   }, []);
+
   const firstTitle = (title) => {
     const Titles = title.split("-");
     return Titles[0];

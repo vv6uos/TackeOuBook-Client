@@ -18,19 +18,15 @@ function MyInfo({ user }) {
       .get(`${API_URL}/member/${userId}`)
       .then((result) => {
         const response = result.data;
-        console.log("MEMBER RESPONSE : ", response);
         if (response.answer) {
           const member = response.member;
           setMyInfo({
             id: member.user_id,
             name: member.user_name,
           });
-        } else {
-          console.log(response.msg);
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : MEMBER REQUEST");
         alert("마이페이지 서버 관리자에게 문의 부탁드립니다");
       });
   }, [userId]);

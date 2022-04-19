@@ -21,16 +21,10 @@ function MyBooks({ user }) {
       .get(`${API_URL}/userBooks/read/user/${user.id}/onRent`)
       .then((result) => {
         const response = result.data;
-        console.log("USERBOOKS/READ/OnRent RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
           setMyBooksOnRent(newBookList(userBooks));
-        } else {
-          console.log(response.msg);
         }
-      })
-      .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/UPDATE/OnRent REQUEST");
       });
 
     //반납한 책들 서버에 요청
@@ -38,16 +32,10 @@ function MyBooks({ user }) {
       .get(`${API_URL}/userBooks/read/user/${user.id}/returned`)
       .then((result) => {
         const response = result.data;
-        console.log("USERBOOKS/READ/returned RESPONSE : ", response);
         if (response.answer) {
           const userBooks = response.result;
           setMyReturnedBooks(newBookList(userBooks));
-        } else {
-          console.log(response.msg);
         }
-      })
-      .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/UPDATE/returned REQUEST");
       });
 
     setLoadBooks(false);
@@ -83,16 +71,12 @@ function MyBooks({ user }) {
       )
       .then((result) => {
         const response = result.data;
-        console.log("USERBOOKS/UPDATE RESPONSE : ", response);
         if (response.answer) {
           console.log(response.result);
           alert("반납되었습니다.");
-        } else {
-          console.log(response.msg);
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USERBOOKS/UPDATE REQUEST");
         alert("마이페이지 관리자에게 문의 부탁드립니다");
       });
     setLoadBooks(true);

@@ -95,18 +95,16 @@ function RegisterPage() {
       })
       .then((result) => {
         const response = result.data;
-        console.log("USER/CREATE RESPONSE : ", response);
         if (response.answer) {
           console.log(response.result);
           alert("회원가입을 축하드립니다.");
           window.location.replace("/login");
         } else {
-          alert(response.msg);
+          alert("회원가입에 실패했습니다.");
           window.location.reload();
         }
       })
       .catch((err) => {
-        console.log(" **FAIL : USER/CREATE REQUEST");
         alert("회원가입 관리자에게 문의 부탁드립니다");
       });
   };
