@@ -4,7 +4,6 @@ import { useState } from "react";
 //-----import 내부
 import { myTheme } from "style";
 import { Logo, Modal, SubscribePop } from "components";
-import { MenuButton } from "./Navigations/Nav_buttons/index";
 import { MemberNav, DefaultNav } from "./Navigations/index";
 
 //----- 메인 로그인/로그인하지않은 유저에게 각각 다른 navigation컴포넌트 보여짐
