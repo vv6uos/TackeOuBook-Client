@@ -73,9 +73,10 @@ DB에 담겨진 대여 도서를 불러옵니다.
 ![modal_rent](https://user-images.githubusercontent.com/92903653/165244964-25b75bba-900f-4629-853a-654e403e7eae.png)![modal_subscribe](https://user-images.githubusercontent.com/92903653/165244973-f16927f0-5845-43b0-b636-7e913805cfec.png)
 
 ### ✅  회원가입/로그인
-실시간 유효성 검사를 하고 유효성 검사를 통과하면 가입하기 버튼이 활성화 됩니다.
+- 회원가입 : 실시간 유효성 검사를 하고 유효성 검사를 통과하면 가입하기 버튼이 활성화 됩니다.
 
 ![register-notvalid](https://user-images.githubusercontent.com/92903653/165247096-3ae1d092-8edc-473a-9290-2137c11c9dc2.png)
+- 로그인 : 아이디와 비밀번호가 일치하는 회원이 있으면 로그인 상태로 만듭니다. 
 ### ✅  로그인 여부에 따른 헤더 구성
 
 로그인 하지 않은 사용자에게는 아래와 같은 헤더가 보입니다.
