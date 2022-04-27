@@ -31,10 +31,23 @@ function LoginPage({ isLogin }) {
   };
   //이벤트함수: 로그인 버튼 클릭시 정보가 유효한지 확인하고 userSession을 생성
   const onSubmit = (e) => {
-    axios.get(
-      `${API_URL}/loginSession/create?userId=${inputs.id}&password=${inputs.password}`,
-      { withCredentials: true }
-    );
+    axios
+      .get(
+        `${API_URL}/loginSession/create?userId=${inputs.id}&password=${inputs.password}`,
+        { withCredentials: true }
+      )
+      .then((result) => {
+        const response = result.data;
+        if (!response.answer) {
+          alert("아이디와 비밀번호를 확인 부탁드립니다.");
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(
+          "잠시 후 시도 부탁드립니다. 반복되는 오류에는 서버관리자에게 문의 부탁드립니다."
+        );
+      });
   };
 
   //-----메인
