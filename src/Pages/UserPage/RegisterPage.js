@@ -85,7 +85,7 @@ function RegisterPage() {
   //이벤트함수 : 가입하기 버튼을 클릭했을 때 서버에 inputs value들을 전송 , 회원가입의 결과를 알려줌
   const onSubmit = (e) => {
     axios
-      .post(`${API_URL}/user/create`, {
+      .post(`${API_URL}/user`, {
         user_id: id.value,
         password: password.value,
         user_name: name.value,

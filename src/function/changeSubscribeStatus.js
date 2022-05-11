@@ -20,9 +20,8 @@ function changeSubscribeStatus(userId, isMemberSubscribe) {
 
   axios
     .post(
-      `${API_URL}/user/update/subscribe`,
+      `${API_URL}/user/${userId}/subscribe`,
       {
-        userId,
         subscribeStatusToChange: member.subscribeStatusToChange,
       },
       { withCredentials: true }

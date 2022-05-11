@@ -7,7 +7,7 @@ import { API_URL } from "config/constants";
 //서버에서 로그인세션 삭제
 function logout() {
   axios
-    .get(`${API_URL}/loginSession/delete`, { withCredentials: true })
+    .get(`${API_URL}/loginSession/out`, { withCredentials: true })
     .then((result) => {
       const response = result.data;
       if (response.answer) {

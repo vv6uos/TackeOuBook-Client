@@ -32,8 +32,12 @@ function LoginPage({ isLogin }) {
   //이벤트함수: 로그인 버튼 클릭시 정보가 유효한지 확인하고 userSession을 생성
   const onSubmit = (e) => {
     axios
-      .get(
-        `${API_URL}/loginSession/create?userId=${inputs.id}&password=${inputs.password}`,
+      .post(
+        `${API_URL}/loginSession`,
+        {
+          userId: inputs.id,
+          password: inputs.password,
+        },
         { withCredentials: true }
       )
       .then((result) => {

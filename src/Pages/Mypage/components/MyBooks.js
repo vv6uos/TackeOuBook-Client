@@ -17,26 +17,22 @@ function MyBooks({ user }) {
 
   useEffect(() => {
     //대여중인 책들 서버에 요청
-    axios
-      .get(`${API_URL}/userBooks/read/user/${user.id}/onRent`)
-      .then((result) => {
-        const response = result.data;
-        if (response.answer) {
-          const userBooks = response.result;
-          setMyBooksOnRent(newBookList(userBooks));
-        }
-      });
+    axios.get(`${API_URL}/userBooks/${user.id}/onRent`).then((result) => {
+      const response = result.data;
+      if (response.answer) {
+        const userBooks = response.result;
+        setMyBooksOnRent(newBookList(userBooks));
+      }
+    });
 
     //반납한 책들 서버에 요청
-    axios
-      .get(`${API_URL}/userBooks/read/user/${user.id}/returned`)
-      .then((result) => {
-        const response = result.data;
-        if (response.answer) {
-          const userBooks = response.result;
-          setMyReturnedBooks(newBookList(userBooks));
-        }
-      });
+    axios.get(`${API_URL}/userBooks/${user.id}/returned`).then((result) => {
+      const response = result.data;
+      if (response.answer) {
+        const userBooks = response.result;
+        setMyReturnedBooks(newBookList(userBooks));
+      }
+    });
 
     setLoadBooks(false);
   }, [user.id, loadBooks]);
@@ -66,9 +62,7 @@ function MyBooks({ user }) {
 
   const onClickReturnBtn = (userBookId, bookId) => {
     axios
-      .get(
-        `${API_URL}/userBooks/update?userBookId=${userBookId}&bookId=${bookId}`
-      )
+      .get(`${API_URL}/userBooks/${userBookId}/${bookId}`)
       .then((result) => {
         const response = result.data;
         if (response.answer) {
